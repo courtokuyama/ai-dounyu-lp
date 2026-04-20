@@ -65,10 +65,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 /* LOGO SLIDER */
 .logo-slider{padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
 .logo-slider-label{text-align:center;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:20px;letter-spacing:.06em}
-.logo-track{display:flex;gap:48px;animation:slideLogos 20s linear infinite;width:max-content;will-change:transform}
-.logo-track img{height:28px;opacity:.45;filter:grayscale(100%);transition:opacity .2s,filter .2s;flex-shrink:0}
+.logo-track{display:flex;gap:56px;animation:slideLogos 30s linear infinite;will-change:transform}
+.logo-track img{height:24px;opacity:.4;filter:grayscale(100%);transition:opacity .2s,filter .2s;flex-shrink:0}
 .logo-track img:hover{opacity:.8;filter:grayscale(0%)}
-@keyframes slideLogos{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes slideLogos{0%{transform:translateX(0)}100%{transform:translateX(calc(-50% - 28px))}}
 
 /* SECTION */
 section{padding:96px 0}
@@ -111,11 +111,15 @@ section{padding:96px 0}
 /* FLOW */
 .flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .flow-step{text-align:center;padding:32px 20px}
-.flow-icon{width:56px;height:56px;border-radius:14px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
-.flow-icon svg{width:26px;height:26px}
-.flow-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-.flow-step h3{font-size:18px;font-weight:700;margin-bottom:10px}
-.flow-step p{font-size:14px;color:var(--sub);line-height:1.7}
+.flow-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:left;position:relative}
+.flow-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.flow-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.flow-badge{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-icon svg{width:22px;height:22px}
+.flow-card h3{font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.4}
+.flow-card p{font-size:14px;color:var(--sub);line-height:1.7}
+.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px;padding:0 4px}
 
 /* PRICING */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
@@ -157,7 +161,9 @@ footer a:hover{color:var(--text)}
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .prob-grid,.flow-grid{grid-template-columns:1fr}
+  .prob-grid{grid-template-columns:1fr}
+  #flow .wrap > div{grid-template-columns:1fr !important}
+  .flow-arrow{transform:rotate(90deg);padding:8px 0}
   .case-grid{grid-template-columns:1fr}
   .price-grid{grid-template-columns:1fr}
   .nav-links{display:none}
@@ -208,12 +214,12 @@ footer a:hover{color:var(--text)}
         </div>
       </div>
       <div class="hero-bubbles">
-        <div class="bubble b1" onclick="activateBubble(this)">Claude Codeってよく聞くけど、うちで使えることあるの？</div>
-        <div class="bubble b2 right" onclick="activateBubble(this)">AI導入って何百万もかかるんでしょ…？</div>
-        <div class="bubble b3" onclick="activateBubble(this)">毎月の請求書作成、もっとラクにならない？</div>
-        <div class="bubble b4 right" onclick="activateBubble(this)">社内にエンジニアいないけど大丈夫？</div>
-        <div class="bubble b5" onclick="activateBubble(this)">ChatGPTは触ったけど、業務にどう活かすかわからない</div>
-        <div class="bubble b6 right" onclick="activateBubble(this)">うちみたいな小さい会社でも意味ある？</div>
+        <div class="bubble b1" onmouseenter="activateBubble(this)">Claude Codeってよく聞くけど、うちで使えることあるの？</div>
+        <div class="bubble b2 right" onmouseenter="activateBubble(this)">AI導入って何百万もかかるんでしょ…？</div>
+        <div class="bubble b3" onmouseenter="activateBubble(this)">毎月の請求書作成、もっとラクにならない？</div>
+        <div class="bubble b4 right" onmouseenter="activateBubble(this)">社内にエンジニアいないけど大丈夫？</div>
+        <div class="bubble b5" onmouseenter="activateBubble(this)">ChatGPTは触ったけど、業務にどう活かすかわからない</div>
+        <div class="bubble b6 right" onmouseenter="activateBubble(this)">うちみたいな小さい会社でも意味ある？</div>
       </div>
     </div>
   </div>
@@ -224,7 +230,7 @@ footer a:hover{color:var(--text)}
   <div class="logo-slider-label">これらのAIツール・サービスを活用して業務を自動化</div>
   <div class="logo-track">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://cdn.worldvectorlogo.com/logos/claude-ai-icon.svg" alt="Claude">
+    <img src="https://mintlify.s3.us-west-1.amazonaws.com/anthropic/logo/light.svg" alt="Claude">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
@@ -232,7 +238,7 @@ footer a:hover{color:var(--text)}
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
     <img src="https://cdn.worldvectorlogo.com/logos/zapier-2.svg" alt="Zapier">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://cdn.worldvectorlogo.com/logos/claude-ai-icon.svg" alt="Claude">
+    <img src="https://mintlify.s3.us-west-1.amazonaws.com/anthropic/logo/light.svg" alt="Claude">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
@@ -354,24 +360,32 @@ footer a:hover{color:var(--text)}
     <div class="sec-label">HOW IT WORKS</div>
     <h2 class="sec-title">3ステップで始められます</h2>
     <p class="sec-lead">あなたがやることは「困っていること」を教えるだけ。あとはお任せください。</p>
-    <div class="flow-grid">
-      <div class="flow-step">
-        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-        <div class="flow-num">1</div>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch">
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-badge">1</div>
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        </div>
         <h3>お悩みを聞かせてください</h3>
-        <p>「毎月の請求書が面倒」「問い合わせが多い」など、日常の困りごとでOK。専門用語は一切不要です。</p>
+        <p>「請求書が面倒」「問い合わせが多い」など、普段の困りごとを教えてください。専門用語は一切不要です。</p>
       </div>
-      <div class="flow-step">
-        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <div class="flow-num">2</div>
-        <h3>私たちが仕組みをつくります</h3>
-        <p>ヒアリングをもとに最適なAI活用を設計。構築・テスト・調整まですべてお任せいただけます。</p>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-badge">2</div>
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        </div>
+        <h3>最適な仕組みをつくります</h3>
+        <p>ヒアリングをもとにAIの活用方法を設計。構築からテストまで、すべてこちらで進めます。</p>
       </div>
-      <div class="flow-step">
-        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div class="flow-num">3</div>
-        <h3>あとは使うだけです</h3>
-        <p>操作レクチャーとマニュアル付きで納品。社員の方がそのまま使えるレベルに仕上げます。</p>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card">
+        <div class="flow-header">
+          <div class="flow-badge">3</div>
+          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        </div>
+        <h3>あとは使うだけ</h3>
+        <p>マニュアルと操作レクチャー付きで納品。社員の方がそのまま使えるレベルに仕上げます。</p>
       </div>
     </div>
   </div>
@@ -452,7 +466,7 @@ footer a:hover{color:var(--text)}
           <span style="font-size:16px;font-weight:700;color:var(--sub)">資料請求＆無料相談</span>
         </div>
         <h2 class="sec-title">まずは、困りごとを<br>教えてください。</h2>
-        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">フォーム送信で「AI活用ガイドブック（PDF）」と「御社の業務に合わせた導入提案書」をお届けします。さらに無料相談（60分）で具体的な活用方法をご案内します。</p>
+        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">フォーム送信で「AI活用ガイドブック（PDF）」と「導入事例集」をお届けします。さらに無料相談（60分）で具体的な活用方法をご案内します。</p>
         <div style="display:flex;flex-direction:column;gap:12px">
           <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 初期費用なし</span>
           <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 営業日1日以内に返信</span>
