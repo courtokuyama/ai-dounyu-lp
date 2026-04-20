@@ -62,7 +62,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .bubble.b6{top:310px;right:20px;transform:rotate(2deg)}
 
 /* LOGO SLIDER */
-.logo-slider{padding:32px 0;border-bottom:1px solid var(--border);overflow:hidden}
+.logo-slider{padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden}
 .logo-slider-label{text-align:center;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:20px;letter-spacing:.06em}
 .logo-track{display:flex;gap:48px;animation:slideLogos 25s linear infinite;width:max-content}
 .logo-track img{height:28px;opacity:.45;filter:grayscale(100%);transition:opacity .2s,filter .2s;flex-shrink:0}
@@ -221,22 +221,25 @@ footer a:hover{color:var(--text)}
   <div class="logo-slider-label">これらのAIツール・サービスを活用して業務を自動化</div>
   <div class="logo-track">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg" alt="Anthropic Claude">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Google Gemini">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg" alt="Claude">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Apps_Script.svg" alt="Google Apps Script">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Workspace">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Apps_Script.svg" alt="GAS">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
     <img src="https://cdn.worldvectorlogo.com/logos/zapier-2.svg" alt="Zapier">
-    <!-- Duplicate for seamless loop -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_365_%282022%29.svg" alt="Microsoft 365">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Line_Messenger_logo.svg" alt="LINE">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg" alt="Anthropic Claude">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Google Gemini">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Anthropic_logo.svg" alt="Claude">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg" alt="Slack">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Apps_Script.svg" alt="Google Apps Script">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Workspace">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Apps_Script.svg" alt="GAS">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
     <img src="https://cdn.worldvectorlogo.com/logos/zapier-2.svg" alt="Zapier">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Microsoft_365_%282022%29.svg" alt="Microsoft 365">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Line_Messenger_logo.svg" alt="LINE">
   </div>
 </div>
 
@@ -442,9 +445,12 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
       <div>
-        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:16px">明朗会計AI</div>
+        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:16px">
+          <span style="font-size:28px;font-weight:900;color:var(--text)">明朗会計<span style="color:var(--accent)">AI</span></span>
+          <span style="font-size:16px;font-weight:700;color:var(--sub)">資料請求＆無料相談</span>
+        </div>
         <h2 class="sec-title">まずは、困りごとを<br>教えてください。</h2>
-        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">30秒で入力完了。「AIで何ができるか」が具体的にわかります。しつこい営業は一切しません。</p>
+        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">フォーム送信で「AI活用ガイドブック（PDF）」と「御社の業務に合わせた導入提案書」をお届けします。さらに無料相談（60分）で具体的な活用方法をご案内します。</p>
         <div style="display:flex;flex-direction:column;gap:12px">
           <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 初期費用なし</span>
           <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 営業日1日以内に返信</span>
