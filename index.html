@@ -51,7 +51,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 /* Hero bubbles */
 .hero-bubbles{position:relative;height:400px}
 .bubble{position:absolute;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:14px 18px;font-size:14px;font-weight:500;color:var(--text);line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0,.06);max-width:240px;transition:transform .3s ease}
-.bubble:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.bubble:hover{transform:translateY(-4px) !important;box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.bubble.active{border-color:var(--accent);z-index:10;transform:scale(1.04) !important;box-shadow:0 12px 32px rgba(13,148,136,.15)}
 .bubble::after{content:'';position:absolute;bottom:-8px;left:24px;width:16px;height:16px;background:var(--bg);border-right:1px solid var(--border);border-bottom:1px solid var(--border);transform:rotate(45deg)}
 .bubble.right::after{left:auto;right:24px}
 .bubble.b1{top:0;left:10px;transform:rotate(-2deg)}
@@ -110,7 +111,9 @@ section{padding:96px 0}
 /* FLOW */
 .flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .flow-step{text-align:center;padding:32px 20px}
-.flow-num{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.flow-icon{width:56px;height:56px;border-radius:14px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.flow-icon svg{width:26px;height:26px}
+.flow-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
 .flow-step h3{font-size:18px;font-weight:700;margin-bottom:10px}
 .flow-step p{font-size:14px;color:var(--sub);line-height:1.7}
 
@@ -205,12 +208,12 @@ footer a:hover{color:var(--text)}
         </div>
       </div>
       <div class="hero-bubbles">
-        <div class="bubble b1">Claude Codeってよく聞くけど、うちで使えることあるの？</div>
-        <div class="bubble b2 right">AI導入って何百万もかかるんでしょ…？</div>
-        <div class="bubble b3">毎月の請求書作成、もっとラクにならない？</div>
-        <div class="bubble b4 right">社内にエンジニアいないけど大丈夫？</div>
-        <div class="bubble b5">ChatGPTは触ったけど、業務にどう活かすかわからない</div>
-        <div class="bubble b6 right">うちみたいな小さい会社でも意味ある？</div>
+        <div class="bubble b1" onclick="activateBubble(this)">Claude Codeってよく聞くけど、うちで使えることあるの？</div>
+        <div class="bubble b2 right" onclick="activateBubble(this)">AI導入って何百万もかかるんでしょ…？</div>
+        <div class="bubble b3" onclick="activateBubble(this)">毎月の請求書作成、もっとラクにならない？</div>
+        <div class="bubble b4 right" onclick="activateBubble(this)">社内にエンジニアいないけど大丈夫？</div>
+        <div class="bubble b5" onclick="activateBubble(this)">ChatGPTは触ったけど、業務にどう活かすかわからない</div>
+        <div class="bubble b6 right" onclick="activateBubble(this)">うちみたいな小さい会社でも意味ある？</div>
       </div>
     </div>
   </div>
@@ -221,7 +224,7 @@ footer a:hover{color:var(--text)}
   <div class="logo-slider-label">これらのAIツール・サービスを活用して業務を自動化</div>
   <div class="logo-track">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Claude_AI_Logo.svg/200px-Claude_AI_Logo.svg.png" alt="Claude">
+    <img src="https://cdn.worldvectorlogo.com/logos/claude-ai-icon.svg" alt="Claude">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
@@ -229,7 +232,7 @@ footer a:hover{color:var(--text)}
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
     <img src="https://cdn.worldvectorlogo.com/logos/zapier-2.svg" alt="Zapier">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Claude_AI_Logo.svg/200px-Claude_AI_Logo.svg.png" alt="Claude">
+    <img src="https://cdn.worldvectorlogo.com/logos/claude-ai-icon.svg" alt="Claude">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
@@ -349,23 +352,26 @@ footer a:hover{color:var(--text)}
 <section style="background:var(--bg2)" id="flow">
   <div class="wrap">
     <div class="sec-label">HOW IT WORKS</div>
-    <h2 class="sec-title">導入は、びっくりするほどカンタンです</h2>
-    <p class="sec-lead">専門知識は不要。あなたがやることは「困っていること」を教えるだけ。</p>
+    <h2 class="sec-title">3ステップで始められます</h2>
+    <p class="sec-lead">あなたがやることは「困っていること」を教えるだけ。あとはお任せください。</p>
     <div class="flow-grid">
       <div class="flow-step">
+        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
         <div class="flow-num">1</div>
-        <h3>困りごとを教える</h3>
-        <p>「毎月の請求書が面倒」「問い合わせ対応が大変」など、日常の不満でOK。専門用語は不要です。</p>
+        <h3>お悩みを聞かせてください</h3>
+        <p>「毎月の請求書が面倒」「問い合わせが多い」など、日常の困りごとでOK。専門用語は一切不要です。</p>
       </div>
       <div class="flow-step">
+        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         <div class="flow-num">2</div>
-        <h3>AIで仕組みをつくる</h3>
-        <p>お話を聞いて、最適なAI活用のかたちをご提案。構築もすべてこちらで行います。</p>
+        <h3>私たちが仕組みをつくります</h3>
+        <p>ヒアリングをもとに最適なAI活用を設計。構築・テスト・調整まですべてお任せいただけます。</p>
       </div>
       <div class="flow-step">
+        <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <div class="flow-num">3</div>
-        <h3>気づけば、ラクになってる</h3>
-        <p>導入後は社員の方がそのまま使えるレベルに。気がついたら業務がラクになっています。</p>
+        <h3>あとは使うだけです</h3>
+        <p>操作レクチャーとマニュアル付きで納品。社員の方がそのまま使えるレベルに仕上げます。</p>
       </div>
     </div>
   </div>
@@ -468,6 +474,12 @@ footer a:hover{color:var(--text)}
   </div>
   <p>&copy; 2025 株式会社BEWIBE. All rights reserved.</p>
 </footer>
+<script>
+function activateBubble(el){
+  document.querySelectorAll('.bubble').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
 
 </body>
 </html>
