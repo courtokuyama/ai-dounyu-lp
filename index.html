@@ -113,10 +113,14 @@ section{padding:96px 0}
 .flow-step{text-align:center;padding:32px 20px}
 .flow-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:left;position:relative}
 .flow-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
-.flow-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.flow-badge{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.flow-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.flow-icon svg{width:22px;height:22px}
+.flow-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.flow-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.flow-tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;flex-shrink:0}
+.flow-tag.hearing{background:#dbeafe;color:#1e40af}
+.flow-tag.build{background:#d1fae5;color:#065f46}
+.flow-tag.deliver{background:#fef3c7;color:#92400e}
+.flow-icon{width:44px;height:44px;border-radius:12px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto}
+.flow-icon svg{width:20px;height:20px}
 .flow-card h3{font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.4}
 .flow-card p{font-size:14px;color:var(--sub);line-height:1.7}
 .flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px;padding:0 4px}
@@ -230,7 +234,7 @@ footer a:hover{color:var(--text)}
   <div class="logo-slider-label">これらのAIツール・サービスを活用して業務を自動化</div>
   <div class="logo-track">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://mintlify.s3.us-west-1.amazonaws.com/anthropic/logo/light.svg" alt="Claude">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg" alt="Claude">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
@@ -238,7 +242,7 @@ footer a:hover{color:var(--text)}
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
     <img src="https://cdn.worldvectorlogo.com/logos/zapier-2.svg" alt="Zapier">
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
-    <img src="https://mintlify.s3.us-west-1.amazonaws.com/anthropic/logo/light.svg" alt="Claude">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg" alt="Claude">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg" alt="Notion">
@@ -364,6 +368,7 @@ footer a:hover{color:var(--text)}
       <div class="flow-card">
         <div class="flow-header">
           <div class="flow-badge">1</div>
+          <span class="flow-tag hearing">ヒアリング</span>
           <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
         </div>
         <h3>お悩みを聞かせてください</h3>
@@ -373,6 +378,7 @@ footer a:hover{color:var(--text)}
       <div class="flow-card">
         <div class="flow-header">
           <div class="flow-badge">2</div>
+          <span class="flow-tag build">構築</span>
           <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         </div>
         <h3>最適な仕組みをつくります</h3>
@@ -382,6 +388,7 @@ footer a:hover{color:var(--text)}
       <div class="flow-card">
         <div class="flow-header">
           <div class="flow-badge">3</div>
+          <span class="flow-tag deliver">納品</span>
           <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         </div>
         <h3>あとは使うだけ</h3>
