@@ -34,7 +34,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .hero-badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:14px;font-weight:700;padding:6px 20px;border-radius:100px;margin-bottom:28px}
 .hero h1{font-size:clamp(32px,5vw,48px);font-weight:900;line-height:1.4;margin-bottom:24px;letter-spacing:-.02em}
 .hero h1 em{font-style:normal;color:var(--accent)}
-.hero-lead{font-size:18px;color:var(--sub);max-width:600px;margin:0 0 40px;line-height:2}
+.hero-lead{font-size:15px;color:var(--sub);max-width:480px;margin:0 0 36px;line-height:1.8}
 .hero-btns{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap}
 .btn-primary{background:var(--accent);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 4px 16px rgba(13,148,136,.25)}
 .btn-primary:hover{background:#0f766e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,148,136,.3)}
@@ -164,8 +164,8 @@ footer a:hover{color:var(--text)}
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-badge">中小企業向け AI活用支援</div>
-        <h1>気がつけば、<br><em>業務がラクになっていた。</em></h1>
-        <p class="hero-lead">「AIって難しそう」——そう思っていた会社ほど、<br>導入後に驚いています。<br>丸投げしている間に、あなたの会社にAIが根づきます。</p>
+        <h1>気づけば、業務が<br><em>ラクになっていた。</em></h1>
+        <p class="hero-lead">「AIって難しそう」——そう思っていた会社ほど、導入後に驚いています。丸投げしている間に、あなたの会社にAIが根づきます。</p>
         <div class="hero-btns">
           <a href="#contact" class="btn-primary" style="text-decoration:none">無料相談する →</a>
           <a href="#cases" class="btn-ghost" style="text-decoration:none">事例を見る</a>
@@ -240,55 +240,55 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <div class="sec-label">CASES</div>
     <h2 class="sec-title">実際に、こんな会社が変わりました</h2>
-    <p class="sec-lead">業種もやったことも違いますが、全社に共通しているのは「やってみたら意外とカンタンだった」という感想でした。</p>
+    <p class="sec-lead">「やってみたら意外とカンタンだった」が全社共通の感想です。</p>
     <div class="case-grid">
       <div class="case-card">
-        <span class="case-tag ops">オペレーション</span>
-        <h3>請求書・帳票の自動生成で作業時間80%削減</h3>
-        <p>毎月手作業だった請求書の作成を、PDF自動生成+メール送付まで自動化。経理担当の月末残業がほぼゼロに。</p>
-        <div class="case-result">→ 月末の作業時間 40時間 → 8時間</div>
+        <span class="case-tag ops">経理</span>
+        <h3>請求書づくりを自動化。月末の残業がほぼゼロに。</h3>
+        <p>毎月手で作っていた請求書を、ボタン一つでPDF生成→メール送信まで。経理担当の月末が劇的に変わった。</p>
+        <div class="case-result">作業時間 40h → 8h（80%削減）</div>
       </div>
       <div class="case-card">
-        <span class="case-tag sales">営業支援</span>
-        <h3>応募書類スクリーニングの自動化で7割以上の工数削減</h3>
-        <p>採用担当が手作業で行っていた書類選考をAIが一次スクリーニング。人が見るべき候補だけに集中できるように。</p>
-        <div class="case-result">→ 書類選考の工数 70%削減</div>
+        <span class="case-tag sales">採用</span>
+        <h3>履歴書チェックをAIに任せたら、採用がスムーズに。</h3>
+        <p>毎回100件以上の応募書類を目で確認していた作業を、AIが一次選考。人が見るべき候補だけに集中できるように。</p>
+        <div class="case-result">選考の手間 70%削減</div>
       </div>
       <div class="case-card">
-        <span class="case-tag ops">オペレーション</span>
-        <h3>問い合わせ一次対応チャットボットで対応負荷を半減</h3>
-        <p>よくある質問への回答をAIチャットボットが24時間対応。スタッフは複雑な案件だけに集中できるように。</p>
-        <div class="case-result">→ 問い合わせ対応時間 50%削減</div>
+        <span class="case-tag ops">カスタマー</span>
+        <h3>よくある問い合わせはAIが24時間対応。</h3>
+        <p>「営業時間は？」「返品できる？」——こうした定番の質問はAIチャットボットが即回答。スタッフは難しい案件だけに集中。</p>
+        <div class="case-result">対応の手間 50%削減</div>
       </div>
       <div class="case-card">
-        <span class="case-tag ops">オペレーション</span>
-        <h3>議事録・レポートのテンプレ化&自動生成</h3>
-        <p>担当者ごとにバラバラだった議事録や報告書を、AIがテンプレートに沿って自動ドラフト。品質も統一。</p>
-        <div class="case-result">→ 1件あたりの作成時間 30分 → 5分</div>
+        <span class="case-tag ops">総務</span>
+        <h3>議事録が5分で完成。もう手で書かなくていい。</h3>
+        <p>会議の録音データからAIが自動で議事録をドラフト。担当者によるバラつきもなくなり、品質も安定。</p>
+        <div class="case-result">1件あたり 30分 → 5分</div>
       </div>
       <div class="case-card">
-        <span class="case-tag dev">システム開発</span>
-        <h3>補助金検索GPTで非エンジニアでも自然言語検索を実現</h3>
-        <p>複雑な補助金制度の検索を、AIが「うちに使えそうな補助金ある？」で答えてくれるツールに。</p>
-        <div class="case-result">→ 調査時間 数日 → 数分</div>
+        <span class="case-tag dev">経営</span>
+        <h3>「うちに使える補助金ある？」で答えが返ってくる。</h3>
+        <p>複雑な補助金制度を、普通の言葉で検索できるAIツールを構築。調べものに数日かかっていたのが数分に。</p>
+        <div class="case-result">調査時間 数日 → 数分</div>
       </div>
       <div class="case-card">
-        <span class="case-tag mkt">マーケティング</span>
-        <h3>競合ニュースを毎日自動要約！情報収集botで営業力UP</h3>
-        <p>営業担当が毎朝個別に集めていた業界ニュースを、AIが自動収集・要約してSlackに配信。</p>
-        <div class="case-result">→ 情報収集の手間 ほぼゼロ</div>
+        <span class="case-tag mkt">営業</span>
+        <h3>業界ニュースが毎朝、勝手にまとまって届く。</h3>
+        <p>営業担当が個別に集めていた競合情報を、AIが自動収集・要約してSlackに毎朝配信。朝の準備時間がゼロに。</p>
+        <div class="case-result">情報収集の手間 → ゼロ</div>
       </div>
       <div class="case-card">
-        <span class="case-tag ops">オペレーション</span>
-        <h3>シフト表自動作成でシフト作成工数を大幅削減</h3>
-        <p>スタッフの希望と稼働条件を踏まえたシフトをAIが自動生成。管理者の月2時間の作業を代替。</p>
-        <div class="case-result">→ シフト作成 月2時間 → 自動</div>
+        <span class="case-tag ops">店舗運営</span>
+        <h3>シフト表が自動で出来上がる。もう悩まない。</h3>
+        <p>スタッフの希望と条件をAIが読み取り、最適なシフトを自動生成。店長が毎月2時間かけていた作業が不要に。</p>
+        <div class="case-result">シフト作成 → 完全自動</div>
       </div>
       <div class="case-card">
-        <span class="case-tag ops">オペレーション</span>
-        <h3>名刺デジタル化で入力工数ゼロに</h3>
-        <p>外部SaaSなしで社内完結の名刺管理。OCRで読み取り→Google連絡先に自動反映。</p>
-        <div class="case-result">→ 名刺入力作業 完全ゼロ</div>
+        <span class="case-tag ops">営業事務</span>
+        <h3>名刺を撮るだけ。手入力ゼロで連絡先に反映。</h3>
+        <p>もらった名刺をスマホで撮影→AIが読み取り→Google連絡先に自動登録。外部サービスなし、社内で完結。</p>
+        <div class="case-result">名刺入力 → 完全ゼロ</div>
       </div>
     </div>
   </div>
