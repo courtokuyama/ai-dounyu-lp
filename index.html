@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>気づけばAI導入 — 中小企業のための、やさしいAI活用</title>
+<title>明朗会計AI — 中小企業のための、やさしいAI活用</title>
 <meta name="description" content="AI導入って難しそう？実は、気づいたら業務が楽になっていた——そんな導入のかたちがあります。中小企業に特化した、わかりやすいAI活用支援。">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -29,17 +29,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .nav-cta:hover{background:#0f766e}
 
 /* HERO */
-.hero{padding:140px 0 80px;text-align:center}
+.hero{padding:140px 0 80px;text-align:left}
 .hero-badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:14px;font-weight:700;padding:6px 20px;border-radius:100px;margin-bottom:28px}
 .hero h1{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.4;margin-bottom:24px;letter-spacing:-.02em}
 .hero h1 em{font-style:normal;color:var(--accent)}
-.hero-lead{font-size:18px;color:var(--sub);max-width:600px;margin:0 auto 40px;line-height:2}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-lead{font-size:18px;color:var(--sub);max-width:600px;margin:0 0 40px;line-height:2}
+.hero-btns{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap}
 .btn-primary{background:var(--accent);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 4px 16px rgba(13,148,136,.25)}
 .btn-primary:hover{background:#0f766e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,148,136,.3)}
 .btn-ghost{background:transparent;color:var(--sub);border:1.5px solid var(--border);padding:16px 32px;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .2s}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.hero-trust{display:flex;justify-content:center;gap:28px;margin-top:36px;flex-wrap:wrap}
+.hero-trust{display:flex;justify-content:flex-start;gap:28px;margin-top:36px;flex-wrap:wrap}
 .hero-trust span{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:6px}
 .hero-trust span::before{content:'✓';color:var(--accent);font-weight:700}
 
@@ -56,7 +56,8 @@ section{padding:96px 0}
 .prob-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
 .prob-card h3{font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.5}
 .prob-card p{font-size:14px;color:var(--sub);line-height:1.8}
-.prob-icon{font-size:28px;margin-bottom:16px;display:block}
+.prob-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--accent-light)}
+.prob-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* CASES */
 .case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
@@ -163,32 +164,32 @@ footer a:hover{color:var(--text)}
     <p class="sec-lead">「AIが気になる。でも何から始めれば…」その悩み、あなただけではありません。</p>
     <div class="prob-grid">
       <div class="prob-card">
-        <span class="prob-icon">💬</span>
+        <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
         <h3>AIって話題だけど、うちに関係ある？</h3>
         <p>ChatGPTやClaudeは知ってる。でも自分の会社のどの業務に使えるのかピンとこない。</p>
       </div>
       <div class="prob-card">
-        <span class="prob-icon">⏰</span>
+        <div class="prob-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>毎月同じ作業に時間を取られている</h3>
         <p>請求書の作成、レポートの集計、問い合わせ対応…。手作業をやめたいけど、仕組みを作る余裕がない。</p>
       </div>
       <div class="prob-card">
-        <span class="prob-icon">🤷</span>
+        <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
         <h3>IT担当がいない</h3>
         <p>社内にエンジニアはいない。外注すると高いし、何を頼めばいいかもわからない。</p>
       </div>
       <div class="prob-card">
-        <span class="prob-icon">💰</span>
+        <div class="prob-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
         <h3>AI導入は高そう</h3>
         <p>大企業向けのサービスばかり。月100万円のコンサルは無理。うちの規模に合う選択肢がほしい。</p>
       </div>
       <div class="prob-card">
-        <span class="prob-icon">📊</span>
+        <div class="prob-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
         <h3>ExcelやGoogleスプレッドシートで限界</h3>
         <p>データは溜まってるのに、活用できてない。毎回手作業で集計してる。</p>
       </div>
       <div class="prob-card">
-        <span class="prob-icon">😰</span>
+        <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>導入してもうちのスタッフが使えるか不安</h3>
         <p>最新ツールを入れても使いこなせなかったら意味がない。教育コストも心配。</p>
       </div>
