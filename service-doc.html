@@ -95,7 +95,8 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 .svc-card-sm p{font-size:13px;color:var(--sub);line-height:1.7}
 
 /* CASE SLIDES */
-.case-img{width:100%;height:100%;object-fit:cover}
+.case-img-bg{width:100%;height:100%;background-size:cover;background-position:center;position:relative}
+.case-img-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)}
 .case-header{display:flex;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap}
 .case-num{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .case-tag{display:inline-block;font-size:16px;font-weight:700;padding:6px 18px;border-radius:8px}
@@ -340,10 +341,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 6: CASE 1 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="製造業">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">1</div>
@@ -378,10 +376,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 7: CASE 2 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="小売・EC">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">2</div>
@@ -416,10 +411,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 8: CASE 3 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="ヘルスケア">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">3</div>
@@ -454,10 +446,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 9: CASE 4 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="カスタマーサポート">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">4</div>
@@ -492,10 +481,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 10: CASE 5 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="契約書管理">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">5</div>
@@ -530,10 +516,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 11: CASE 6 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="ナレッジ管理">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">6</div>
@@ -568,10 +551,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 12: CASE 7 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="飲食チェーン">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">7</div>
@@ -606,10 +586,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 13: CASE 8 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="物流・在庫管理">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">8</div>
@@ -644,10 +621,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 14: CASE 9 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="教育・研修">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">9</div>
@@ -682,10 +656,7 @@ body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-we
 <!-- SLIDE 15: CASE 10 -->
 <div class="slide case-slide">
   <div class="two-col-img" style="flex:1">
-    <div style="position:relative;overflow:hidden">
-      <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="金属加工">
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
-    </div>
+    <div class="case-img-bg" style="background-image:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&q=80')"></div>
     <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
       <div class="case-header">
         <div class="case-num">10</div>
@@ -929,7 +900,7 @@ async function downloadPDF(){
   txt.textContent='生成中...';
   try{
     var jsPDF=window.jspdf.jsPDF;
-    var pdf=new jsPDF({orientation:'landscape',unit:'px',format:[1920,1080],hotfixes:['px_scaling']});
+    var pdf=new jsPDF({orientation:'landscape',unit:'px',format:[1920,1080],hotfixes:['px_scaling'],compress:false});
     var slides=document.querySelectorAll('.slide');
     for(var i=0;i<slides.length;i++){
       var s=slides[i];
@@ -937,10 +908,15 @@ async function downloadPDF(){
       var origM=s.style.marginBottom;
       s.style.transform='none';
       s.style.marginBottom='0';
-      var canvas=await html2canvas(s,{width:1920,height:1080,scale:1,useCORS:true,allowTaint:true,logging:false});
-      var img=canvas.toDataURL('image/jpeg',0.92);
+      var canvas=await html2canvas(s,{
+        width:1920,height:1080,scale:2,
+        useCORS:true,allowTaint:true,logging:false,
+        backgroundColor:'#ffffff',
+        imageTimeout:15000
+      });
+      var img=canvas.toDataURL('image/png');
       if(i>0)pdf.addPage();
-      pdf.addImage(img,'JPEG',0,0,1920,1080);
+      pdf.addImage(img,'PNG',0,0,1920,1080,undefined,'FAST');
       s.style.transform=origT;
       s.style.marginBottom=origM;
       txt.textContent='生成中... ('+(i+1)+'/'+slides.length+')';
