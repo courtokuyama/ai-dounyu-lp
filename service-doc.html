@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>明朗会計AI — サービス詳細 & 導入事例集</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#0d9488;--accent-light:#f0fdfa;--accent-mid:#ccfbf1;
+  --text:#1e293b;--sub:#475569;--muted:#94a3b8;
+  --bg:#ffffff;--bg2:#f8fafc;--border:#e2e8f0;
+  --slide-w:1920px;--slide-h:1080px;
+}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding-top:0}
+  .slide{page-break-after:always;page-break-inside:avoid;transform:none!important;margin:0!important}
+  .slide:last-child{page-break-after:auto}
+  .viewer-bar{display:none!important}
+}
+html{background:#e2e8f0;overflow-x:hidden}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:64px}
+
+/* PDF VIEWER BAR */
+.viewer-bar{position:fixed;top:0;left:0;right:0;z-index:300;height:64px;background:#1e293b;display:flex;align-items:center;justify-content:space-between;padding:0 32px;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.viewer-bar-left{display:flex;align-items:center;gap:14px}
+.viewer-bar-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.viewer-bar-icon svg{width:20px;height:20px;fill:#fff}
+.viewer-bar-title{color:#fff;font-size:16px;font-weight:700}
+.viewer-bar-sub{color:#94a3b8;font-size:13px;margin-left:12px}
+.viewer-bar-right{display:flex;align-items:center;gap:16px}
+.viewer-pages{color:#94a3b8;font-size:14px}
+.dl-btn{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px;transition:all .2s}
+.dl-btn:hover{background:#0f766e}
+.dl-btn:disabled{background:#64748b;cursor:wait}
+.dl-btn svg{width:18px;height:18px;fill:currentColor}
+@media print{.viewer-bar{display:none!important}body{padding-top:0}}
+
+.slide{
+  width:var(--slide-w);height:var(--slide-h);
+  margin:0 auto 40px;background:var(--bg);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 8px 40px rgba(0,0,0,.12);
+  transform-origin:top left;
+}
+@media print{.slide{margin:0;box-shadow:none;transform:none!important}}
+
+.slide-pad{padding:72px 100px}
+.slide-label{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+.slide-title{font-size:52px;font-weight:900;line-height:1.3;margin-bottom:16px;letter-spacing:-.02em}
+.slide-title em{font-style:normal;color:var(--accent)}
+.slide-lead{font-size:22px;color:var(--sub);line-height:1.8;max-width:960px}
+.slide-footer{position:absolute;bottom:0;left:0;right:0;height:44px;background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 100px;font-size:13px;color:var(--muted)}
+.slide-footer .logo-text{font-weight:900;color:var(--text);font-size:14px}
+.slide-footer .logo-text span{color:var(--accent)}
+
+/* COVER */
+.cover-slide{background:linear-gradient(135deg,#f0fdfa 0%,#fff 35%,#fff 65%,#f0fdfa 100%);justify-content:center;align-items:flex-start;text-align:left;padding:100px 120px}
+.cover-slide::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:var(--accent-mid);opacity:.25}
+.cover-slide::after{content:'';position:absolute;bottom:-150px;right:-100px;width:500px;height:500px;border-radius:50%;background:var(--accent-mid);opacity:.15}
+.cover-inner{position:relative;z-index:1}
+.cover-badge{display:inline-block;background:var(--accent);color:#fff;font-size:18px;font-weight:700;padding:10px 36px;border-radius:100px;margin-bottom:40px}
+.cover-slide h1{font-size:80px;font-weight:900;letter-spacing:-.03em;margin-bottom:20px}
+.cover-slide h1 em{color:var(--accent);font-style:normal}
+.cover-sub{font-size:26px;color:var(--sub);line-height:1.7;margin-bottom:48px}
+.cover-meta{font-size:18px;color:var(--muted);line-height:2}
+.cover-logo-mark{font-size:16px;font-weight:700;color:var(--accent);letter-spacing:.2em;margin-bottom:24px}
+
+/* LAYOUT */
+.two-col-img{display:grid;grid-template-columns:38fr 62fr;gap:0;flex:1}
+
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px}
+.stat-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:40px 28px;text-align:center}
+.stat-num{font-size:64px;font-weight:900;color:var(--accent);line-height:1.1}
+.stat-unit{font-size:22px;font-weight:700;color:var(--accent)}
+.stat-label{font-size:17px;color:var(--muted);margin-top:8px;font-weight:500}
+.stat-detail{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.6}
+
+/* SVC CARDS */
+.svc-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.svc-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:32px 24px}
+.svc-num{width:44px;height:44px;border-radius:12px;background:var(--accent);color:#fff;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.svc-card h4{font-size:19px;font-weight:700;margin-bottom:10px;line-height:1.4}
+.svc-card p{font-size:15px;color:var(--sub);line-height:1.8}
+.svc-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.svc-card-sm{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.svc-card-sm .svc-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:8px}
+.svc-card-sm h5{font-size:16px;font-weight:700;margin-bottom:2px}
+.svc-card-sm p{font-size:13px;color:var(--sub);line-height:1.7}
+
+/* CASE SLIDES */
+.case-img{width:100%;height:100%;object-fit:cover}
+.case-header{display:flex;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+.case-num{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.case-tag{display:inline-block;font-size:16px;font-weight:700;padding:6px 18px;border-radius:8px}
+.case-info{font-size:16px;color:var(--muted)}
+.tag-mfg{background:#dbeafe;color:#1e40af}
+.tag-retail{background:#fce7f3;color:#be185d}
+.tag-health{background:#d1fae5;color:#065f46}
+.tag-cs{background:#fef3c7;color:#92400e}
+.tag-doc{background:#e0e7ff;color:#3730a3}
+.tag-kb{background:#fae8ff;color:#86198f}
+.tag-finance{background:#dcfce7;color:#166534}
+.tag-logistics{background:#fff7ed;color:#9a3412}
+.tag-edu{background:#f0fdf4;color:#15803d}
+
+.case-slide h3{font-size:48px;font-weight:900;line-height:1.25;margin-bottom:16px}
+.case-meta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.case-meta-item{background:var(--bg2);padding:12px 14px;text-align:center}
+.case-meta-label{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:2px}
+.case-meta-val{font-size:17px;font-weight:700;color:var(--text)}
+
+.case-body{font-size:18px;color:var(--sub);line-height:1.75;margin-bottom:14px}
+.case-sub{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px;letter-spacing:.04em}
+.case-body ul{padding-left:20px;margin:4px 0 0}
+.case-body li{margin-bottom:2px;font-size:18px}
+
+.case-result{background:var(--accent-light);border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:18px 22px}
+.case-result .result-headline{font-size:24px;font-weight:900;color:var(--accent);margin-bottom:4px}
+.case-result p{font-size:17px;color:var(--sub);margin:0;line-height:1.7}
+
+
+/* PROCESS */
+.timeline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.timeline-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px 24px;position:relative}
+.timeline-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.timeline-dot{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.timeline-dur{font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:3px 12px;border-radius:6px}
+.timeline-card h4{font-size:18px;font-weight:700;margin-bottom:6px;line-height:1.4}
+.timeline-card p{font-size:15px;color:var(--sub);line-height:1.75}
+
+/* TECH */
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.tech-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:32px 24px}
+.tech-top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.tech-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--accent);flex-shrink:0}
+.tech-card h4{font-size:18px;font-weight:700}
+.tech-card p{font-size:15px;color:var(--sub);line-height:1.75}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px;align-items:start}
+.price-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:32px 24px;position:relative}
+.price-card.featured{border:2px solid var(--accent)}
+.price-badge{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:13px;font-weight:700;padding:5px 20px;border-radius:100px;white-space:nowrap}
+.price-name{font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.price-amount{font-size:38px;font-weight:900;margin-bottom:4px;line-height:1.1}
+.price-note{font-size:14px;color:var(--muted);margin-bottom:16px}
+.price-list{list-style:none;margin-bottom:0}
+.price-list li{font-size:14px;color:var(--sub);padding:7px 0;border-bottom:1px solid var(--bg2);display:flex;align-items:flex-start;gap:8px}
+.price-list li::before{content:'✓';color:var(--accent);font-weight:700;font-size:13px;flex-shrink:0}
+
+/* GUARANTEE */
+.guar-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:36px}
+.guar-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:32px 28px;display:flex;gap:20px;align-items:flex-start}
+.guar-num{width:48px;height:48px;border-radius:12px;background:var(--accent-light);color:var(--accent);font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.guar-card h4{font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.4}
+.guar-card p{font-size:16px;color:var(--sub);line-height:1.75}
+
+/* END */
+.end-slide{background:var(--accent);color:#fff;justify-content:center;align-items:center;text-align:center}
+.end-slide h2{font-size:56px;font-weight:900;margin-bottom:20px;line-height:1.3}
+.end-slide p{font-size:24px;opacity:.85;margin-bottom:40px;max-width:700px}
+.end-btn{display:inline-block;background:#fff;color:var(--accent);padding:20px 64px;border-radius:14px;font-size:22px;font-weight:700;text-decoration:none;transition:transform .2s}
+.end-btn:hover{transform:translateY(-3px)}
+.end-meta{margin-top:48px;font-size:18px;opacity:.6;line-height:2}
+</style>
+</head>
+<body>
+
+<!-- VIEWER BAR -->
+<div class="viewer-bar">
+  <div class="viewer-bar-left">
+    <div class="viewer-bar-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg></div>
+    <div class="viewer-bar-title">明朗会計AI_サービス詳細_導入事例集.pdf</div>
+    <div class="viewer-bar-sub">20ページ / 株式会社BEWIBE</div>
+  </div>
+  <div class="viewer-bar-right">
+    <button class="dl-btn" id="dlBtn" onclick="downloadPDF()">
+      <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      <span id="dlText">PDFをダウンロード</span>
+    </button>
+  </div>
+</div>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide cover-slide">
+  <div class="cover-inner">
+    <div class="cover-logo-mark">BEWIBE Inc.</div>
+    <div class="cover-badge">サービス詳細 & 導入事例集</div>
+    <h1>明朗会計<em>AI</em></h1>
+    <p class="cover-sub">中小企業のための、やさしいAI活用支援。<br>丸投げで導入、その日から業務が変わる。</p>
+    <div class="cover-meta">
+      株式会社BEWIBE<br>
+      contact@bewibe.com<br>
+      2025年4月 第3版
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: TOC -->
+<div class="slide">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">CONTENTS</div>
+    <div class="slide-title">目次</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 48px;margin-top:36px">
+      <div style="display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--bg2);border-radius:14px;border:1px solid var(--border)">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">01</div>
+        <div style="flex:1"><div style="font-size:22px;font-weight:700">サービス概要</div><div style="font-size:15px;color:var(--muted);margin-top:2px">明朗会計AIの全体像と対応領域</div></div>
+        <div style="font-size:20px;font-weight:900;color:var(--muted)">p.3</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--bg2);border-radius:14px;border:1px solid var(--border)">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">02</div>
+        <div style="flex:1"><div style="font-size:22px;font-weight:700">導入実績</div><div style="font-size:15px;color:var(--muted);margin-top:2px">満足度・削減率・導入期間の実績値</div></div>
+        <div style="font-size:20px;font-weight:900;color:var(--muted)">p.4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--bg2);border-radius:14px;border:1px solid var(--border)">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">03</div>
+        <div style="flex:1"><div style="font-size:22px;font-weight:700">導入事例集</div><div style="font-size:15px;color:var(--muted);margin-top:2px">製造・小売・医療・ITなど10社の具体事例</div></div>
+        <div style="font-size:20px;font-weight:900;color:var(--muted)">p.5-15</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--bg2);border-radius:14px;border:1px solid var(--border)">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">04</div>
+        <div style="flex:1"><div style="font-size:22px;font-weight:700">導入プロセス</div><div style="font-size:15px;color:var(--muted);margin-top:2px">ヒアリングから納品・サポートまでの全体像</div></div>
+        <div style="font-size:20px;font-weight:900;color:var(--muted)">p.16</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--bg2);border-radius:14px;border:1px solid var(--border)">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">05</div>
+        <div style="flex:1"><div style="font-size:22px;font-weight:700">技術基盤 & セキュリティ</div><div style="font-size:15px;color:var(--muted);margin-top:2px">使用AI・暗号化・アクセス制御の詳細</div></div>
+        <div style="font-size:20px;font-weight:900;color:var(--muted)">p.17</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:28px 32px;background:var(--bg2);border-radius:14px;border:1px solid var(--border)">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0">06</div>
+        <div style="flex:1"><div style="font-size:22px;font-weight:700">料金体系 & 品質保証</div><div style="font-size:15px;color:var(--muted);margin-top:2px">4プランの料金詳細と返金保証</div></div>
+        <div style="font-size:20px;font-weight:900;color:var(--muted)">p.18-19</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>2</div></div>
+</div>
+
+<!-- SLIDE 3: SERVICE OVERVIEW -->
+<div class="slide">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">SERVICE OVERVIEW</div>
+    <div class="slide-title">明朗会計AIとは</div>
+    <p class="slide-lead">「AIを使いたいけど何から始めれば…」を、ヒアリングから構築・運用までワンストップで解決するサービスです。</p>
+    <div class="svc-grid-4">
+      <div class="svc-card">
+        <div class="svc-num">1</div>
+        <h4>業務ヒアリング & AI設計</h4>
+        <p>業務フローを丁寧に聞き取り、AIで自動化できるポイントを特定。「何ができるか」ではなく「何が楽になるか」の視点で設計します。</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">2</div>
+        <h4>カスタムAIツール構築</h4>
+        <p>チャットボット、文書自動生成、データ分析など、業種・業務に最適なAIをゼロから構築。既存システムとの連携も対応。</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">3</div>
+        <h4>レクチャー & マニュアル納品</h4>
+        <p>ITに詳しくないスタッフでもすぐに使えるよう、操作レクチャーとマニュアルをセットで納品します。</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">4</div>
+        <h4>継続サポート & 拡張</h4>
+        <p>導入後も月次で活用状況をレビュー。新しい業務のAI化提案や、既存ツールの改善・拡張を継続的に。</p>
+      </div>
+    </div>
+    <div class="svc-grid-2">
+      <div class="svc-card-sm"><div class="svc-dot"></div><div><h5>バックオフィス自動化</h5><p>請求書・見積書の自動生成、経費精算、勤怠集計、議事録、シフト表など繰り返し業務を削減</p></div></div>
+      <div class="svc-card-sm"><div class="svc-dot"></div><div><h5>顧客対応 & コミュニケーション</h5><p>FAQチャットボット、メール自動返信、問い合わせの分類・ルーティング、顧客データ分析</p></div></div>
+      <div class="svc-card-sm"><div class="svc-dot"></div><div><h5>ナレッジマネジメント</h5><p>社内マニュアルのAI検索、属人化した業務知識のDB化、ドキュメント自動分類・要約</p></div></div>
+      <div class="svc-card-sm"><div class="svc-dot"></div><div><h5>データ分析 & レポーティング</h5><p>売上分析の自動化、KPIダッシュボード構築、競合情報の自動収集・要約、市場レポート生成</p></div></div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>3</div></div>
+</div>
+
+<!-- SLIDE 4: STATS -->
+<div class="slide" style="background:var(--bg2)">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">RESULTS</div>
+    <div class="slide-title">導入実績サマリー</div>
+    <p class="slide-lead">中小企業を中心に、業種を問わずAI活用の成果が出ています。</p>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">92<span class="stat-unit">%</span></div>
+        <div class="stat-label">導入企業の満足度</div>
+        <div class="stat-detail">導入後アンケートで「満足」「非常に満足」と回答した企業の割合</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">67<span class="stat-unit">%</span></div>
+        <div class="stat-label">平均業務時間削減率</div>
+        <div class="stat-detail">対象業務にかかっていた工数の平均削減率。最大で95%削減の事例も</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2.4<span class="stat-unit">週</span></div>
+        <div class="stat-label">平均導入期間</div>
+        <div class="stat-detail">ヒアリングから稼働開始までの平均期間。シンプルな案件は最短1週間</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">0<span class="stat-unit">件</span></div>
+        <div class="stat-label">セキュリティインシデント</div>
+        <div class="stat-detail">サービス開始以来、情報漏洩やセキュリティ事故はゼロ。NDA対応可</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:24px">
+      <div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border)"><span style="font-size:28px;font-weight:900;color:var(--text)">10+</span><div style="font-size:14px;color:var(--muted);margin-top:2px">業種の導入実績</div></div>
+      <div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border)"><span style="font-size:28px;font-weight:900;color:var(--text)">50+</span><div style="font-size:14px;color:var(--muted);margin-top:2px">構築したAIツール数</div></div>
+      <div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border)"><span style="font-size:28px;font-weight:900;color:var(--text)">98<span style="font-size:18px">%</span></span><div style="font-size:14px;color:var(--muted);margin-top:2px">納品後の継続利用率</div></div>
+      <div style="text-align:center;padding:16px;background:var(--bg);border-radius:12px;border:1px solid var(--border)"><span style="font-size:28px;font-weight:900;color:var(--text)">4.8<span style="font-size:18px">/5</span></span><div style="font-size:14px;color:var(--muted);margin-top:2px">サポート対応の評価</div></div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>4</div></div>
+</div>
+
+<!-- SLIDE 5: CASE SECTION TITLE -->
+<div class="slide" style="background:var(--accent);color:#fff;justify-content:center;align-items:center;text-align:center">
+  <div>
+    <div style="font-size:16px;font-weight:700;letter-spacing:.2em;opacity:.6;margin-bottom:16px">CASE STUDIES</div>
+    <h2 style="font-size:72px;font-weight:900;margin-bottom:28px;line-height:1.2">導入事例集</h2>
+    <p style="font-size:26px;opacity:.8;max-width:800px;margin:0 auto;line-height:1.7">製造・小売・医療・IT・飲食・物流——<br>さまざまな業界で、AI活用の効果が出ています。</p>
+    <div style="display:flex;gap:32px;justify-content:center;margin-top:48px">
+      <div style="text-align:center"><div style="font-size:48px;font-weight:900">10</div><div style="font-size:16px;opacity:.7">社の事例</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.2)"></div>
+      <div style="text-align:center"><div style="font-size:48px;font-weight:900">7</div><div style="font-size:16px;opacity:.7">業種</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.2)"></div>
+      <div style="text-align:center"><div style="font-size:48px;font-weight:900">67%</div><div style="font-size:16px;opacity:.7">平均削減率</div></div>
+    </div>
+  </div>
+  <div class="slide-footer" style="background:rgba(0,0,0,.15);border-color:rgba(255,255,255,.1)"><div class="logo-text" style="color:#fff">明朗会計<span style="color:#5eead4">AI</span></div><div style="color:rgba(255,255,255,.6)">5</div></div>
+</div>
+
+<!-- SLIDE 6: CASE 1 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="製造業">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">1</div>
+        <span class="case-tag tag-mfg">製造業</span>
+        <span class="case-info">従業員 約120名 / 精密部品メーカー</span>
+      </div>
+      <h3>発注書・納品書のデータ入力を完全自動化。<br>月間40時間の手作業がゼロに。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">手入力によるミスと残業</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">3週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">OCR + LLM + RPA</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">取引先から届くFAX・PDF形式の発注書を、事務スタッフが1件ずつ社内の受注管理システムに手入力していた。1日あたり平均50件の処理があり、品番の読み間違いや数量の転記ミスによる出荷違いが月に5件発生。繁忙期には事務部門が深夜まで残業する状況が常態化し、採用コストも増大していた。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>FAX・PDFを自動で読み取るOCRパイプラインを構築し、LLMが品番・数量・納期・単価を構造化データに変換</li>
+          <li>受注管理システムにAPI連携で自動登録。読み取り信頼度が基準未満の場合のみスタッフに確認通知を送信</li>
+          <li>手書きFAXにも対応する高精度OCRモデルを採用し、認識精度99.2%を実現</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">月間40時間 → ほぼゼロ / 入力ミス 月5件 → 0件</div>
+        <p>事務スタッフは取引先対応や品質管理など付加価値業務にシフト。残業は部門全体で月30時間削減。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>6</div></div>
+</div>
+
+<!-- SLIDE 7: CASE 2 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="小売・EC">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">2</div>
+        <span class="case-tag tag-retail">小売・EC</span>
+        <span class="case-info">従業員 約30名 / アパレルEC事業者</span>
+      </div>
+      <h3>商品説明文の作成を半自動化。<br>週20時間の作業が3時間に短縮。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">商品登録の遅れとリソース不足</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">2週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">LLM + スプレッドシート連携</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">新商品登録時にバイヤーが商品画像とスペックシートをもとに説明文を手書き。1商品あたり約30分かかり、週40商品の新規登録がボトルネック化。担当者によって文体がバラつき、ブランドイメージの一貫性も損なわれていた。新商品の公開が遅れることで機会損失も発生。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>スプレッドシートに素材・サイズ・カラー等のスペックを入力するだけで、ブランドトーンに合った説明文をAIが自動生成</li>
+          <li>過去の人気商品300件の説明文を学習データとして活用し、CVRの高い表現パターンを反映</li>
+          <li>SEOキーワードの自動挿入機能も搭載し、検索流入も最適化。担当者は生成結果を確認・微調整するだけ</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">作成時間 85%削減 / 新商品の公開スピード 3倍に向上</div>
+        <p>説明文の品質が安定し、商品ページの直帰率が12%改善。バイヤーは仕入れ業務に集中可能に。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>7</div></div>
+</div>
+
+<!-- SLIDE 8: CASE 3 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="ヘルスケア">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">3</div>
+        <span class="case-tag tag-health">医療・ヘルスケア</span>
+        <span class="case-info">院数 3院 / 整体・鍼灸グループ</span>
+      </div>
+      <h3>施術後フォローを自動パーソナライズ。<br>リピート予約率が1.4倍に向上。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">フォロー不足によるリピート率低下</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">2週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">LLM + LINE連携 + 予約DB</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">施術後のフォローアップは各院のスタッフが手動でLINEを送っていたが、忙しい時期にはフォローが抜け落ちることが多発。内容もテンプレート的で、患者ごとの症状や施術内容に合ったアドバイスができておらず、リピート予約率は42%にとどまっていた。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>予約管理システムから施術履歴を自動取得し、患者の症状・施術部位・来院頻度をAIが分析</li>
+          <li>施術後24時間以内に、個別化されたセルフケアアドバイスと次回予約提案をLINEで自動配信</li>
+          <li>配信内容は施術者のレビューを経てから送信する安全設計。過度な医学的表現を自動フィルタリング</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">リピート予約率 42% → 58% / フォロー実施率 60% → 98%</div>
+        <p>「自分のことを覚えてくれている」と患者満足度も向上。スタッフの負荷は増えず月間売上が約120万円増加。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>8</div></div>
+</div>
+
+<!-- SLIDE 9: CASE 4 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="カスタマーサポート">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">4</div>
+        <span class="case-tag tag-cs">カスタマーサポート</span>
+        <span class="case-info">従業員 約80名 / SaaS企業</span>
+      </div>
+      <h3>問い合わせ対応をAIが一次受け。<br>サポートチームの負荷を半減させた。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">問い合わせ急増に人員不足</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">4週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">RAG + チャットUI + Slack</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">製品のユーザー数急増に伴い、カスタマーサポートへの問い合わせが月間800件を突破。5名のサポートチームでは対応が追いつかず、初回応答まで平均8時間。同じ質問への繰り返し対応がチームの士気にも影響し、離職リスクも高まっていた。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>製品マニュアル・過去2年分のサポート履歴・FAQをベクトルDBに格納し、RAGベースのAIチャットボットを構築</li>
+          <li>ユーザーの問い合わせにAIが即座に回答を提示。解決できない場合のみ人間のオペレーターにエスカレーション</li>
+          <li>対応ログをSlackに自動通知し品質監視を実現。回答精度は週次レポートで継続改善</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">AI自動解決率 62% / 初回応答時間 8時間 → 即時</div>
+        <p>サポートチームは複雑な案件に集中できるようになり、対応品質が向上。追加の人員採用は不要に。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>9</div></div>
+</div>
+
+<!-- SLIDE 10: CASE 5 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="契約書管理">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">5</div>
+        <span class="case-tag tag-doc">書類・契約管理</span>
+        <span class="case-info">従業員 約200名 / 建設資材商社</span>
+      </div>
+      <h3>契約書レビューの所要時間を1/5に短縮。<br>法務チームの生産性が劇的改善。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">契約書チェックのボトルネック化</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">3週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">LLM + 文書解析 + チェックリスト</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">取引先から届く契約書は月に60件以上。法務担当者2名が全件を目視チェックし、1件あたり平均45分を要していた。チェック待ち案件が常に滞留し、営業部門から「契約締結が遅い」という不満が上がり、受注スピードにも影響していた。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>契約書PDFをアップロードすると、AIが条項ごとにリスクスコアを算出しリスク分析を実行</li>
+          <li>自社の過去500件の契約テンプレートと比較し、通常と異なる条件（支払条件、免責事項、違約金等）をハイライト表示</li>
+          <li>チェックリスト形式でレビューポイントを自動生成し、法務担当者は重要箇所のみを精査するフローに変更</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">レビュー時間 45分 → 10分 / 契約締結リードタイム 40%短縮</div>
+        <p>法務チームの残業が大幅に減少し営業との関係も改善。見落としリスクもAIの二重チェックにより低減。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>10</div></div>
+</div>
+
+<!-- SLIDE 11: CASE 6 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="ナレッジ管理">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">6</div>
+        <span class="case-tag tag-kb">ナレッジ管理</span>
+        <span class="case-info">従業員 約60名 / ITコンサルティング会社</span>
+      </div>
+      <h3>社内ナレッジを「聞けばわかる」状態に。<br>新人の立ち上がりが2倍速に。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">ノウハウの属人化と教育コスト</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">3週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">RAG + Slack Bot + Notion連携</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">プロジェクトごとのノウハウがSlackの過去ログやNotionの個人ページに散在。「あの案件どうやったっけ？」と聞くたびベテラン社員の手が止まり、1日あたり平均2時間が新人対応に消えていた。過去の提案書やテンプレートも、知っている人に聞かないと見つからない状態。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>Notion・Googleドライブ・Slackに蓄積された約12,000件のドキュメントをベクトルDBに統合</li>
+          <li>Slack上でAIボットに自然言語で質問すると、関連するドキュメント・過去事例・手順をソースリンク付きで回答</li>
+          <li>回答品質を担保するため、情報の鮮度スコアと信頼度を表示。古い情報には自動でアラートを付与</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">新人自走期間 3ヶ月 → 6週間 / ベテランへの問い合わせ 70%減</div>
+        <p>「まずAIに聞く」が社内文化として定着。ベテラン社員は教育負荷から解放され、付加価値業務に集中。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>11</div></div>
+</div>
+
+<!-- SLIDE 12: CASE 7 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="飲食チェーン">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">7</div>
+        <span class="case-tag tag-finance">経理・財務</span>
+        <span class="case-info">従業員 約45名 / 飲食チェーン（5店舗）</span>
+      </div>
+      <h3>日次売上レポートの集計を全自動化。<br>店長の管理業務を月20時間削減。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">売上データの手動集計と報告遅延</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">2週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">POS連携 + LLM + 自動化</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">各店舗の店長が閉店後にPOSデータをExcelに転記し、翌朝までに本部へメール送信するルーティンが常態化。集計ミスや報告漏れが頻繁に発生し、月次の経営会議で正確な数字が出てこないことも。店長の残業が増え、本来の店舗運営業務に影響していた。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>POSシステムからAPIで売上データを自動取得し、全5店舗の実績をリアルタイムで集約</li>
+          <li>AIが前日比・前週比・前年比の分析コメントを自動生成し、毎朝8時にSlackへ自動配信</li>
+          <li>急激な売上変動・客単価の大幅変化を検知した場合はアラートを即時発出。天候や周辺イベントとの相関も分析</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">レポート作成 → 完全自動化 / 経営判断のスピード大幅向上</div>
+        <p>店長は閉店後の事務作業から解放。翌日の営業準備や接客品質の向上に時間を充てられるように。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>12</div></div>
+</div>
+
+<!-- SLIDE 13: CASE 8 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="物流・在庫管理">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">8</div>
+        <span class="case-tag tag-logistics">物流・在庫管理</span>
+        <span class="case-info">従業員 約90名 / 食品卸売業者</span>
+      </div>
+      <h3>需要予測AIで在庫ロスを35%削減。<br>発注業務も半自動化に成功。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">過剰在庫と欠品の繰り返し</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">4週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">時系列分析 + LLM + 発注連携</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">生鮮食品を中心に扱う卸売業者として、需要予測の精度が経営に直結。担当者の経験と勘に頼った発注で、廃棄ロスが年間売上の約8%を占めていた。季節変動やイベントの影響も加味しきれず、「足りない」「余る」の繰り返しが常態化。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>過去3年分の販売データ、天候データ、地域イベント情報をもとに商品カテゴリ別の需要予測モデルを構築</li>
+          <li>AIが最適発注量を提案し、担当者が確認後ワンクリックで発注システムに反映</li>
+          <li>予測精度は日次で自動評価しモデルを継続的に改善。特売・セール時の需要急増にも対応する学習機能を搭載</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">廃棄ロス 35%削減 / 年間 約1,800万円のコスト削減</div>
+        <p>欠品率60%改善。発注担当者は判断業務に集中し、作業的なデータ確認から解放された。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>13</div></div>
+</div>
+
+<!-- SLIDE 14: CASE 9 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="教育・研修">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">9</div>
+        <span class="case-tag tag-edu">教育・研修</span>
+        <span class="case-info">従業員 約150名 / 人材派遣会社</span>
+      </div>
+      <h3>研修コンテンツの作成をAIで効率化。<br>年間の制作コストを60%削減。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">研修教材の作成に膨大な工数</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">3週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">LLM + スライド生成 + クイズ生成</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">派遣先ごとに異なる業務マニュアルをもとに、研修資料を毎回ゼロから作成。1コースあたり約40時間を要し、研修担当者2名では年間20コースが限界だった。資料の品質も担当者の力量に依存しており、派遣先からの評価にバラつきがあった。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>業務マニュアルPDFをアップロードすると、AIがスライド構成案・講義ノート・確認クイズを自動生成</li>
+          <li>過去の研修資料50コース分のトーン・構成パターンを学習し、一貫した品質を担保</li>
+          <li>理解度チェック用の小テストも自動生成。正答率データから研修内容の改善ポイントも自動で特定</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">制作時間 40時間 → 15時間 / 年間制作コース数 20 → 50</div>
+        <p>研修の質が安定し、派遣先からの満足度スコアが15%向上。担当者は教材設計に集中可能に。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>14</div></div>
+</div>
+
+<!-- SLIDE 15: CASE 10 -->
+<div class="slide case-slide">
+  <div class="two-col-img" style="flex:1">
+    <div style="position:relative;overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=960&h=1080&fit=crop&crop=center" class="case-img" alt="金属加工">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(255,255,255,.6) 100%)"></div>
+    </div>
+    <div style="padding:48px 72px 48px 52px;display:flex;flex-direction:column;justify-content:center">
+      <div class="case-header">
+        <div class="case-num">10</div>
+        <span class="case-tag tag-mfg">製造業</span>
+        <span class="case-info">従業員 約70名 / 金属加工メーカー</span>
+      </div>
+      <h3>見積もり作成を自動化。<br>営業の提案スピードが3倍に向上。</h3>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><div class="case-meta-label">課題</div><div class="case-meta-val">見積もり作成の属人化と遅延</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">導入期間</div><div class="case-meta-val">3週間</div></div>
+        <div class="case-meta-item"><div class="case-meta-label">使用技術</div><div class="case-meta-val">LLM + 図面解析 + 原価DB連携</div></div>
+      </div>
+      <div class="case-sub">導入前の課題</div>
+      <div class="case-body">顧客から図面と仕様書が届くと、ベテラン技術者が加工工程・材料費・工数を見積もっていた。1件あたり2〜3時間を要し、その技術者が不在だと見積もりが完全に停滞。営業がすぐに提案できず、競合に先を越されて受注機会を逃すケースも頻発していた。</div>
+      <div class="case-sub">構築したソリューション</div>
+      <div class="case-body">
+        <ul>
+          <li>過去5年分の見積もりデータ約3,000件をAIに学習させ、図面情報から加工工程・所要時間・材料費を自動算出</li>
+          <li>材料の市況データと社内原価テーブルをリアルタイムに反映し、精度の高い概算見積もりを即時生成</li>
+          <li>技術者は自動生成された見積もりを確認・調整するだけのフローに変更。ナレッジの社内共有にも貢献</li>
+        </ul>
+      </div>
+      <div class="case-result">
+        <div class="result-headline">見積もり作成 2-3時間 → 30分 / 受注率 前年比18%向上</div>
+        <p>ベテラン依存を解消し、営業チーム全員が初動で概算提示可能に。提案リードタイムは3日→1日に短縮。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>15</div></div>
+</div>
+
+<!-- SLIDE 16: PROCESS -->
+<div class="slide">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">PROCESS</div>
+    <div class="slide-title">導入プロセスの詳細</div>
+    <p class="slide-lead">ヒアリングから稼働まで通常2〜4週間。お客様にお願いするのは「困りごとを教えること」だけです。</p>
+    <div class="timeline-grid">
+      <div class="timeline-card">
+        <div class="timeline-top"><div class="timeline-dot">1</div><div class="timeline-dur">Day 1</div></div>
+        <h4>初回ヒアリング（60分・無料）</h4>
+        <p>オンラインまたは対面で業務フローと課題を丁寧に聞き取り。AIのことがわからなくてもOK。「面倒だな」と感じていることを教えてください。概算費用もその場でお伝えします。</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-top"><div class="timeline-dot">2</div><div class="timeline-dur">Day 2-3</div></div>
+        <h4>提案書 & お見積もり</h4>
+        <p>ヒアリング内容をもとに具体的なAI活用プランをご提案。どんなツールを作るか、どう業務が変わるか、費用はいくらかを明確に記載。見えない状態でのご契約はお願いしません。</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-top"><div class="timeline-dot">3</div><div class="timeline-dur">Day 4-14</div></div>
+        <h4>設計・構築・テスト</h4>
+        <p>ご承認後、AIツールの設計・構築に着手。お客様にご用意いただくのは業務データ（スプレッドシート、PDF等）のみ。進捗は週次で報告し、方向修正にも随時対応します。</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-top"><div class="timeline-dot">4</div><div class="timeline-dur">Day 14-18</div></div>
+        <h4>動作確認 & フィードバック</h4>
+        <p>完成したツールを実際の業務データでテスト。お客様にも触っていただき、フィードバックを反映。この段階での修正は追加費用なし。納得いくまで調整します。</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-top"><div class="timeline-dot">5</div><div class="timeline-dur">Day 18-21</div></div>
+        <h4>レクチャー & マニュアル納品</h4>
+        <p>ツールを使うスタッフ向けの操作レクチャーを実施（オンライン可）。操作マニュアル（PDF）もお渡し。「誰でも使える」状態に仕上げることがゴールです。</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-top"><div class="timeline-dot">6</div><div class="timeline-dur">30日間</div></div>
+        <h4>導入後サポート（無料）</h4>
+        <p>納品後30日間は無料サポート期間。使い方の質問、不具合修正、軽微な機能追加に対応。チャット/メールで即日回答。実運用で見えてきた改善点も反映します。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>16</div></div>
+</div>
+
+<!-- SLIDE 17: TECH -->
+<div class="slide" style="background:var(--bg2)">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">TECHNOLOGY & SECURITY</div>
+    <div class="slide-title">技術基盤 & セキュリティ</div>
+    <p class="slide-lead">エンタープライズレベルの安全性と最新AI技術を、中小企業でも使える形でご提供します。</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-top"><div class="tech-icon">AI</div><h4>大規模言語モデル（LLM）</h4></div>
+        <p>GPT-4o、Claude、Gemini等の最新LLMを業務に最適な形で活用。用途・コスト・精度に応じてモデルを選定。プロンプト設計から運用チューニングまで一貫対応。</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-top"><div class="tech-icon">DB</div><h4>RAG（検索拡張生成）</h4></div>
+        <p>社内データを安全に活用するベクトル検索技術。外部にデータを渡さず、社内の文書・マニュアル・履歴データに基づいた正確な回答を生成します。</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-top"><div class="tech-icon">API</div><h4>RPA & API連携</h4></div>
+        <p>会計ソフト、CRM、POS、Google Workspace、Slack等の既存システムとAPI連携。新しいツールを覚える必要なし。今の業務の延長線上でAIが動きます。</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-top"><div class="tech-icon">TLS</div><h4>暗号化通信 & データ保護</h4></div>
+        <p>すべての通信はTLS 1.3で暗号化。保存データもAES-256で暗号化し不正アクセスを防止。データの保管場所・保持期間も明確に規定。</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-top"><div class="tech-icon">IAM</div><h4>アクセス制御 & 監査ログ</h4></div>
+        <p>ロールベースのアクセス管理で「誰が何を見られるか」を細かく設定可能。すべての操作は監査ログに記録され、トレーサビリティを完備。</p>
+      </div>
+      <div class="tech-card">
+        <div class="tech-top"><div class="tech-icon">NDA</div><h4>NDA対応 & コンプライアンス</h4></div>
+        <p>機密情報を扱うプロジェクトではNDA（秘密保持契約）を締結。個人情報保護法に準拠したデータ取り扱いルールを明文化。第三者への情報提供は一切行いません。</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>17</div></div>
+</div>
+
+<!-- SLIDE 18: PRICING -->
+<div class="slide">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">PRICING</div>
+    <div class="slide-title">料金体系</div>
+    <p class="slide-lead">明朗会計を掲げる以上、料金は事前にすべてお伝えします。隠れた追加費用はありません。</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">スポット相談</div>
+        <div class="price-amount">¥0</div>
+        <div class="price-note">まずは話を聞きたい方</div>
+        <ul class="price-list">
+          <li>現状ヒアリング（60分）</li>
+          <li>AI活用の可能性を診断</li>
+          <li>導入ロードマップ提案</li>
+          <li>お見積もり</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">人気</div>
+        <div class="price-name">おまかせ導入</div>
+        <div class="price-amount" style="color:var(--accent)">¥148,000〜</div>
+        <div class="price-note">業務に合ったAIを構築・導入</div>
+        <ul class="price-list">
+          <li>業務分析 + 最適なAI設計</li>
+          <li>ツールの構築・実装</li>
+          <li>社員向け操作レクチャー</li>
+          <li>導入後1ヶ月サポート</li>
+          <li>マニュアル付き納品</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-name">月額サポート</div>
+        <div class="price-amount">¥49,800〜<span style="font-size:18px;font-weight:400;color:var(--muted)">/月</span></div>
+        <div class="price-note">継続的にAI活用を広げたい方</div>
+        <ul class="price-list">
+          <li>月2回のAI活用相談</li>
+          <li>既存ツールの改善・拡張</li>
+          <li>新業務のAI化提案</li>
+          <li>チャットサポート</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-name">フルサポート</div>
+        <div class="price-amount">¥98,000〜<span style="font-size:18px;font-weight:400;color:var(--muted)">/月</span></div>
+        <div class="price-note">AI活用を全社で推進したい方</div>
+        <ul class="price-list">
+          <li>週1回のAIミーティング</li>
+          <li>無制限のツール改善・新規構築</li>
+          <li>優先対応</li>
+          <li>定期レポート</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:15px;color:var(--muted);margin-top:20px">※ 料金は業務内容・規模によって変わります。外部API・インフラ費用（月額数千円〜）は別途。すべて事前にお見積もりを提示します。承認なしに請求が発生することはありません。</p>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>18</div></div>
+</div>
+
+<!-- SLIDE 19: GUARANTEE -->
+<div class="slide" style="background:var(--bg2)">
+  <div class="slide-pad" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="slide-label">GUARANTEE & SUPPORT</div>
+    <div class="slide-title">品質保証 & サポート体制</div>
+    <p class="slide-lead">導入して終わりではなく、定着して成果が出るまでサポートします。</p>
+    <div class="guar-grid">
+      <div class="guar-card">
+        <div class="guar-num">1</div>
+        <div>
+          <h4>成果が出なければ全額返金</h4>
+          <p>導入後30日間で、事前に合意した効果指標を達成できなかった場合は全額返金。「やってみたけどダメだった」のリスクはゼロ。成果が出る確信があるからこそ、この保証を提供しています。</p>
+        </div>
+      </div>
+      <div class="guar-card">
+        <div class="guar-num">2</div>
+        <div>
+          <h4>営業日1日以内の即日対応</h4>
+          <p>サポート期間中のお問い合わせには営業日1日以内に回答。緊急の不具合は当日中に対応。チャットまたはメールでいつでもご連絡ください。放置されることはありません。</p>
+        </div>
+      </div>
+      <div class="guar-card">
+        <div class="guar-num">3</div>
+        <div>
+          <h4>フィードバック反映は何度でも無料</h4>
+          <p>動作確認期間中の修正・調整は何度でも追加費用なし。「思っていたのと違う」を残さず、お客様が納得いくまで何度でも調整します。中途半端な状態で納品することはありません。</p>
+        </div>
+      </div>
+      <div class="guar-card">
+        <div class="guar-num">4</div>
+        <div>
+          <h4>ロックイン（囲い込み）なし</h4>
+          <p>月額プランはいつでも解約可能。違約金は一切ありません。納品したツール・マニュアル・ソースコードはすべてお客様の資産です。他社に乗り換える場合の引き継ぎにも対応します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="logo-text">明朗会計<span>AI</span></div><div>19</div></div>
+</div>
+
+<!-- SLIDE 20: END -->
+<div class="slide end-slide">
+  <div style="position:relative;z-index:1">
+    <h2>まずは、お気軽に<br>ご相談ください</h2>
+    <p>60分の無料ヒアリングで、AIがあなたの業務に<br>どう活きるかを具体的にお伝えします。</p>
+    <a href="mailto:contact@bewibe.com?subject=%E6%98%8E%E6%9C%97%E4%BC%9A%E8%A8%88AI%20%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%E3%81%AE%E3%81%8A%E7%94%B3%E3%81%97%E8%BE%BC%E3%81%BF&body=%E3%81%8A%E5%90%8D%E5%89%8D%3A%0A%E4%BC%9A%E7%A4%BE%E5%90%8D%3A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E5%86%85%E5%AE%B9%3A%0A" class="end-btn">無料相談する →</a>
+    <div class="end-meta">
+      株式会社BEWIBE<br>
+      contact@bewibe.com
+    </div>
+  </div>
+</div>
+
+<script>
+function scaleSlides(){
+  var vw=window.innerWidth;
+  var sw=1920;
+  var scale=Math.min(vw/sw,1);
+  var offsetX=(vw-sw*scale)/2;
+  var slides=document.querySelectorAll('.slide');
+  slides.forEach(function(s){
+    s.style.transform='translateX('+offsetX+'px) scale('+scale+')';
+    s.style.marginBottom=(-(1080*(1-scale))+40)+'px';
+  });
+}
+scaleSlides();
+window.addEventListener('resize',scaleSlides);
+
+async function downloadPDF(){
+  var btn=document.getElementById('dlBtn');
+  var txt=document.getElementById('dlText');
+  btn.disabled=true;
+  txt.textContent='生成中...';
+  try{
+    var jsPDF=window.jspdf.jsPDF;
+    var pdf=new jsPDF({orientation:'landscape',unit:'px',format:[1920,1080],hotfixes:['px_scaling']});
+    var slides=document.querySelectorAll('.slide');
+    for(var i=0;i<slides.length;i++){
+      var s=slides[i];
+      var origT=s.style.transform;
+      var origM=s.style.marginBottom;
+      s.style.transform='none';
+      s.style.marginBottom='0';
+      var canvas=await html2canvas(s,{width:1920,height:1080,scale:1,useCORS:true,allowTaint:true,logging:false});
+      var img=canvas.toDataURL('image/jpeg',0.92);
+      if(i>0)pdf.addPage();
+      pdf.addImage(img,'JPEG',0,0,1920,1080);
+      s.style.transform=origT;
+      s.style.marginBottom=origM;
+      txt.textContent='生成中... ('+(i+1)+'/'+slides.length+')';
+    }
+    pdf.save('明朗会計AI_サービス詳細_導入事例集.pdf');
+  }catch(e){
+    console.error(e);
+    alert('PDF生成中にエラーが発生しました。もう一度お試しください。');
+  }
+  btn.disabled=false;
+  txt.textContent='PDFをダウンロード';
+}
+</script>
+</body>
+</html>
