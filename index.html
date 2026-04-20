@@ -6,6 +6,7 @@
 <title>明朗会計AI — 中小企業のための、やさしいAI活用</title>
 <meta name="description" content="AI導入って難しそう？実は、気づいたら業務が楽になっていた——そんな導入のかたちがあります。中小企業に特化した、わかりやすいAI活用支援。">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script async src="https://tally.so/widgets/embed.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -146,6 +147,7 @@ footer a:hover{color:var(--text)}
   .hero-lead{font-size:16px}
   section{padding:64px 0}
   .cta-section{margin:0 16px;padding:56px 20px}
+  #contact .wrap > div{grid-template-columns:1fr !important}
 }
 </style>
 </head>
@@ -385,13 +387,23 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA + FORM -->
 <section style="padding:80px 0" id="contact">
-  <div class="cta-section">
-    <h2>まずは、困りごとを<br>教えてください。</h2>
-    <p>無料相談は60分。「AIで何ができるか」が具体的にわかります。<br>しつこい営業は一切しません。</p>
-    <a href="mailto:contact@bewibe.com" class="cta-btn" style="text-decoration:none">無料相談する →</a>
-    <p style="font-size:13px;opacity:.6;margin-top:16px">contact@bewibe.com</p>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+      <div>
+        <h2 class="sec-title">まずは、困りごとを<br>教えてください。</h2>
+        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">30秒で入力完了。「AIで何ができるか」が具体的にわかります。しつこい営業は一切しません。</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 初期費用なし</span>
+          <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 営業日1日以内に返信</span>
+          <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 無理な営業は一切しません</span>
+        </div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:520px;position:relative">
+        <iframe data-tally-src="https://tally.so/r/obVzWX?transparentBackground=1" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="明朗会計AI 資料請求フォーム" style="position:absolute;top:-40px;left:0"></iframe>
+      </div>
+    </div>
   </div>
 </section>
 
