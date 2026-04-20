@@ -66,10 +66,14 @@ section{padding:96px 0}
 /* PROBLEMS */
 .prob-bg{background:var(--bg2)}
 .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.prob-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;transition:box-shadow .2s}
+.prob-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;transition:box-shadow .2s;cursor:pointer}
 .prob-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
 .prob-card h3{font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.5}
 .prob-card p{font-size:14px;color:var(--sub);line-height:1.8}
+.prob-answer{max-height:0;overflow:hidden;transition:max-height .35s ease,margin .3s ease,padding .3s ease;background:var(--accent-light);border-radius:8px;font-size:14px;color:var(--text);line-height:1.8;padding:0 16px;margin-top:0}
+.prob-card.open .prob-answer{max-height:200px;padding:14px 16px;margin-top:14px}
+.prob-cta{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);margin-top:10px;text-decoration:none}
+.prob-cta:hover{text-decoration:underline}
 .prob-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--accent-light)}
 .prob-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
@@ -149,7 +153,7 @@ footer a:hover{color:var(--text)}
 
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">気づけば<span>AI</span>導入</div>
+    <div class="nav-logo">明朗会計<span>AI</span></div>
     <a href="#contact" class="nav-cta" style="text-decoration:none">無料相談する</a>
   </div>
 </nav>
@@ -191,35 +195,41 @@ footer a:hover{color:var(--text)}
     <h2 class="sec-title">こんなこと、感じていませんか？</h2>
     <p class="sec-lead">「AIが気になる。でも何から始めれば…」その悩み、あなただけではありません。</p>
     <div class="prob-grid">
-      <div class="prob-card">
+      <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
         <h3>AIって話題だけど、うちに関係ある？</h3>
         <p>ChatGPTやClaudeは知ってる。でも自分の会社のどの業務に使えるのかピンとこない。</p>
+        <div class="prob-answer">明朗会計AIでは、無料ヒアリングであなたの業務を聞き取り、AIで自動化できるポイントを具体的にご提案します。「うちでは使えない」と思っていた会社ほど、驚くケースが多いです。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
-      <div class="prob-card">
+      <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>毎月同じ作業に時間を取られている</h3>
         <p>請求書の作成、レポートの集計、問い合わせ対応…。手作業をやめたいけど、仕組みを作る余裕がない。</p>
+        <div class="prob-answer">繰り返し作業こそAIの得意分野。請求書の自動生成やレポートのドラフト作成など、仕組みの構築はすべてこちらで行います。あなたは「これが面倒」と言うだけ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
-      <div class="prob-card">
+      <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
         <h3>IT担当がいない</h3>
         <p>社内にエンジニアはいない。外注すると高いし、何を頼めばいいかもわからない。</p>
+        <div class="prob-answer">エンジニア不要です。設計・構築・レクチャーまですべて明朗会計AIが担当。納品後は社員の方がそのまま使えるレベルに仕上げます。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
-      <div class="prob-card">
+      <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
         <h3>AI導入は高そう</h3>
         <p>大企業向けのサービスばかり。月100万円のコンサルは無理。うちの規模に合う選択肢がほしい。</p>
+        <div class="prob-answer">明朗会計AIは中小企業に特化。¥148,000〜の明朗会計で、追加料金なし。初期相談は無料なので、まず見積もりだけでもどうぞ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
-      <div class="prob-card">
+      <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
         <h3>ExcelやGoogleスプレッドシートで限界</h3>
         <p>データは溜まってるのに、活用できてない。毎回手作業で集計してる。</p>
+        <div class="prob-answer">既存のスプレッドシートやシステムはそのまま。AIが裏側でデータを読み取り、集計・分析・レポート化を自動で行います。ツールを変える必要はありません。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
-      <div class="prob-card">
+      <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>導入してもうちのスタッフが使えるか不安</h3>
         <p>最新ツールを入れても使いこなせなかったら意味がない。教育コストも心配。</p>
+        <div class="prob-answer">「使いこなす」必要はありません。普段の操作（メール、スプレッドシート等）をするだけでAIが裏で動く設計。操作レクチャーとマニュアルも付きます。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
     </div>
   </div>
