@@ -79,18 +79,18 @@ section{padding:96px 0}
 /* STATS */
 .stats-section{padding:64px 0;background:var(--bg)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.stat-card{padding:28px 20px;border-right:1px solid var(--border);background:var(--bg);transition:background .2s}
+.stat-card{padding:28px 24px;border-right:1px solid var(--border);background:var(--bg);transition:background .2s;display:flex;flex-direction:column}
 .stat-card:last-child{border-right:none}
 .stat-card:hover{background:var(--bg2)}
-.stat-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.stat-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;height:48px}
 .stat-num{font-size:42px;font-weight:900;color:var(--text);line-height:1}
 .stat-num em{font-style:normal;font-size:20px;color:var(--accent)}
-.stat-badge{font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:4px;white-space:nowrap}
-.stat-label{font-size:14px;color:var(--sub);line-height:1.4;font-weight:700;margin-bottom:12px}
-.stat-chart{height:56px;margin-bottom:10px}
-.stat-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:6px}
-.stat-src{font-size:9px;color:var(--muted);opacity:.7;letter-spacing:.02em;text-transform:uppercase}
-@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-card:nth-child(2){border-right:none}.stat-card:nth-child(3),.stat-card:nth-child(4){border-top:1px solid var(--border)}}
+.stat-badge{font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+.stat-label{font-size:13px;color:var(--sub);font-weight:700;margin-bottom:14px;white-space:nowrap;height:18px}
+.stat-chart{height:72px;margin-bottom:12px}
+.stat-desc{font-size:11px;color:var(--muted);line-height:1.5;flex:1}
+.stat-src{font-size:9px;color:var(--muted);opacity:.7;letter-spacing:.02em;text-transform:uppercase;margin-top:8px}
+@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-card:nth-child(2){border-right:none}.stat-card:nth-child(3),.stat-card:nth-child(4){border-top:1px solid var(--border)}.stat-label{white-space:normal}}
 
 /* PROBLEMS */
 .prob-bg{background:var(--bg2)}
@@ -279,13 +279,14 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">導入企業の満足度</span>
         <div class="stat-chart">
-          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
-            <rect x="0" y="38" width="110" height="16" rx="4" fill="#0d9488" opacity="0.5"/>
-            <rect x="114" y="38" width="6" height="16" rx="4" fill="#e2e8f0"/>
-            <text x="96" y="30" font-size="12" fill="#0d9488" font-weight="700">92%</text>
+          <svg width="100%" height="72" viewBox="0 0 140 72" fill="none">
+            <rect x="0" y="0" width="130" height="72" rx="6" fill="#0d9488" opacity="0.12"/>
+            <rect x="0" y="0" width="130" height="72" rx="6" fill="url(#g1)" opacity="0.3"/>
+            <rect x="130" y="0" width="10" height="72" rx="0 6 6 0" fill="#e2e8f0" opacity="0.5"/>
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="130" y2="0"><stop stop-color="#0d9488" stop-opacity="0.1"/><stop offset="1" stop-color="#0d9488" stop-opacity="0.4"/></linearGradient></defs>
           </svg>
         </div>
-        <span class="stat-desc">導入後アンケートで「満足」「非常に満足」と回答した企業の割合。</span>
+        <span class="stat-desc">「満足」「非常に満足」と回答した企業の割合</span>
       </div>
       <div class="stat-card">
         <div class="stat-top">
@@ -294,14 +295,13 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">平均業務時間削減率</span>
         <div class="stat-chart">
-          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
-            <polyline points="0,48 24,44 48,36 72,28 96,16 120,6" stroke="#0d9488" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <polygon points="0,48 24,44 48,36 72,28 96,16 120,6 120,56 0,56" fill="#0d9488" opacity="0.08"/>
-            <circle cx="120" cy="6" r="4" fill="#0d9488"/>
-            <text x="100" y="18" font-size="10" fill="#0d9488" font-weight="700">-67%</text>
+          <svg width="100%" height="72" viewBox="0 0 140 72" fill="none">
+            <polyline points="0,64 28,58 56,46 84,32 112,16 140,6" stroke="#0d9488" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <polygon points="0,64 28,58 56,46 84,32 112,16 140,6 140,72 0,72" fill="#0d9488" opacity="0.08"/>
+            <circle cx="140" cy="6" r="5" fill="#0d9488"/>
           </svg>
         </div>
-        <span class="stat-desc">対象業務にかかっていた工数の平均削減率。最大で95%削減の事例も。</span>
+        <span class="stat-desc">対象業務の平均削減率。最大95%削減の事例も</span>
       </div>
       <div class="stat-card">
         <div class="stat-top">
@@ -310,32 +310,32 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">平均導入期間</span>
         <div class="stat-chart">
-          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
-            <rect x="0" y="16" width="28" height="14" rx="6" fill="#0d9488" opacity="0.25"/>
-            <rect x="32" y="16" width="28" height="14" rx="6" fill="#0d9488" opacity="0.5"/>
-            <rect x="64" y="16" width="28" height="14" rx="6" fill="#0d9488" opacity="0.8"/>
-            <rect x="96" y="16" width="24" height="14" rx="6" fill="#0d9488"/>
-            <text x="6" y="46" font-size="10" fill="#94a3b8" font-weight="500">相談</text>
-            <text x="38" y="46" font-size="10" fill="#94a3b8" font-weight="500">構築</text>
-            <text x="68" y="46" font-size="10" fill="#94a3b8" font-weight="500">テスト</text>
-            <text x="98" y="46" font-size="10" fill="#0d9488" font-weight="700">納品</text>
+          <svg width="100%" height="72" viewBox="0 0 140 72" fill="none">
+            <rect x="0" y="14" width="32" height="18" rx="9" fill="#0d9488" opacity="0.2"/>
+            <rect x="36" y="14" width="32" height="18" rx="9" fill="#0d9488" opacity="0.45"/>
+            <rect x="72" y="14" width="32" height="18" rx="9" fill="#0d9488" opacity="0.7"/>
+            <rect x="108" y="14" width="32" height="18" rx="9" fill="#0d9488"/>
+            <text x="8" y="52" font-size="11" fill="#94a3b8" font-weight="600">相談</text>
+            <text x="42" y="52" font-size="11" fill="#94a3b8" font-weight="600">構築</text>
+            <text x="76" y="52" font-size="11" fill="#94a3b8" font-weight="600">テスト</text>
+            <text x="112" y="52" font-size="11" fill="#0d9488" font-weight="700">納品</text>
           </svg>
         </div>
-        <span class="stat-desc">ヒアリングから稼働開始まで。シンプルな案件は最短1週間。</span>
+        <span class="stat-desc">シンプルな案件は最短1週間で稼働開始</span>
       </div>
       <div class="stat-card">
         <div class="stat-top">
           <span class="stat-num">0<em>件</em></span>
           <span class="stat-badge">安全</span>
         </div>
-        <span class="stat-label">セキュリティインシデント</span>
+        <span class="stat-label">セキュリティ事故</span>
         <div class="stat-chart">
-          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
-            <path d="M60 2L84 16V38C84 44 74 52 60 52C46 52 36 44 36 38V16L60 2Z" fill="#0d9488" opacity="0.1" stroke="#0d9488" stroke-width="2"/>
-            <path d="M50 28L56 34L70 20" stroke="#0d9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="100%" height="72" viewBox="0 0 140 72" fill="none">
+            <path d="M70 4L100 20V46C100 54 88 64 70 64C52 64 40 54 40 46V20L70 4Z" fill="#0d9488" opacity="0.1" stroke="#0d9488" stroke-width="2.5"/>
+            <path d="M58 36L65 43L82 26" stroke="#0d9488" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <span class="stat-desc">サービス開始以来、情報漏洩やセキュリティ事故はゼロ。NDA対応可。</span>
+        <span class="stat-desc">情報漏洩・セキュリティ事故ゼロ。NDA対応可</span>
       </div>
     </div>
   </div>
