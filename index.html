@@ -86,8 +86,8 @@ section{padding:96px 0}
 .stat-num{font-size:42px;font-weight:900;color:var(--text);line-height:1}
 .stat-num em{font-style:normal;font-size:20px;color:var(--accent)}
 .stat-badge{font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:2px 8px;border-radius:4px;white-space:nowrap}
-.stat-label{font-size:13px;color:var(--sub);line-height:1.5;margin-bottom:12px;min-height:36px}
-.stat-chart{height:32px;margin-bottom:10px}
+.stat-label{font-size:14px;color:var(--sub);line-height:1.4;font-weight:700;margin-bottom:12px}
+.stat-chart{height:56px;margin-bottom:10px}
 .stat-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:6px}
 .stat-src{font-size:9px;color:var(--muted);opacity:.7;letter-spacing:.02em;text-transform:uppercase}
 @media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-card:nth-child(2){border-right:none}.stat-card:nth-child(3),.stat-card:nth-child(4){border-top:1px solid var(--border)}}
@@ -279,10 +279,10 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">導入企業の満足度</span>
         <div class="stat-chart">
-          <svg width="100%" height="32" viewBox="0 0 120 32" fill="none">
-            <rect x="0" y="22" width="110" height="10" rx="3" fill="#0d9488" opacity="0.5"/>
-            <rect x="114" y="22" width="6" height="10" rx="3" fill="#e2e8f0"/>
-            <text x="100" y="16" font-size="9" fill="#0d9488" font-weight="600">92%</text>
+          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
+            <rect x="0" y="38" width="110" height="16" rx="4" fill="#0d9488" opacity="0.5"/>
+            <rect x="114" y="38" width="6" height="16" rx="4" fill="#e2e8f0"/>
+            <text x="96" y="30" font-size="12" fill="#0d9488" font-weight="700">92%</text>
           </svg>
         </div>
         <span class="stat-desc">導入後アンケートで「満足」「非常に満足」と回答した企業の割合。</span>
@@ -294,12 +294,11 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">平均業務時間削減率</span>
         <div class="stat-chart">
-          <svg width="100%" height="32" viewBox="0 0 120 32" fill="none">
-            <polyline points="0,6 24,8 48,14 72,18 96,24 120,28" stroke="#e2e8f0" stroke-width="2" fill="none" stroke-dasharray="4,4"/>
-            <polyline points="0,6 24,10 48,16 72,22 96,26 120,28" stroke="#0d9488" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <polyline points="0,6 24,6 48,8 72,10 96,10 120,10" stroke="#0d9488" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
-            <circle cx="120" cy="10" r="3" fill="#0d9488" opacity="0.4"/>
-            <text x="104" y="8" font-size="8" fill="#0d9488" font-weight="600">AI化後</text>
+          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
+            <polyline points="0,48 24,44 48,36 72,28 96,16 120,6" stroke="#0d9488" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <polygon points="0,48 24,44 48,36 72,28 96,16 120,6 120,56 0,56" fill="#0d9488" opacity="0.08"/>
+            <circle cx="120" cy="6" r="4" fill="#0d9488"/>
+            <text x="100" y="18" font-size="10" fill="#0d9488" font-weight="700">-67%</text>
           </svg>
         </div>
         <span class="stat-desc">対象業務にかかっていた工数の平均削減率。最大で95%削減の事例も。</span>
@@ -311,15 +310,15 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">平均導入期間</span>
         <div class="stat-chart">
-          <svg width="100%" height="32" viewBox="0 0 120 32" fill="none">
-            <rect x="0" y="12" width="28" height="8" rx="4" fill="#0d9488" opacity="0.25"/>
-            <rect x="32" y="12" width="28" height="8" rx="4" fill="#0d9488" opacity="0.5"/>
-            <rect x="64" y="12" width="28" height="8" rx="4" fill="#0d9488" opacity="0.8"/>
-            <rect x="96" y="12" width="24" height="8" rx="4" fill="#0d9488"/>
-            <text x="8" y="28" font-size="7" fill="#94a3b8">相談</text>
-            <text x="38" y="28" font-size="7" fill="#94a3b8">構築</text>
-            <text x="70" y="28" font-size="7" fill="#94a3b8">テスト</text>
-            <text x="98" y="28" font-size="7" fill="#0d9488" font-weight="600">納品</text>
+          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
+            <rect x="0" y="16" width="28" height="14" rx="6" fill="#0d9488" opacity="0.25"/>
+            <rect x="32" y="16" width="28" height="14" rx="6" fill="#0d9488" opacity="0.5"/>
+            <rect x="64" y="16" width="28" height="14" rx="6" fill="#0d9488" opacity="0.8"/>
+            <rect x="96" y="16" width="24" height="14" rx="6" fill="#0d9488"/>
+            <text x="6" y="46" font-size="10" fill="#94a3b8" font-weight="500">相談</text>
+            <text x="38" y="46" font-size="10" fill="#94a3b8" font-weight="500">構築</text>
+            <text x="68" y="46" font-size="10" fill="#94a3b8" font-weight="500">テスト</text>
+            <text x="98" y="46" font-size="10" fill="#0d9488" font-weight="700">納品</text>
           </svg>
         </div>
         <span class="stat-desc">ヒアリングから稼働開始まで。シンプルな案件は最短1週間。</span>
@@ -331,9 +330,9 @@ footer a:hover{color:var(--text)}
         </div>
         <span class="stat-label">セキュリティインシデント</span>
         <div class="stat-chart">
-          <svg width="100%" height="32" viewBox="0 0 120 32" fill="none">
-            <path d="M60 2L78 12V24C78 28 70 32 60 32C50 32 42 28 42 24V12L60 2Z" fill="#0d9488" opacity="0.12" stroke="#0d9488" stroke-width="1.5"/>
-            <path d="M52 17L57 22L68 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="100%" height="56" viewBox="0 0 120 56" fill="none">
+            <path d="M60 2L84 16V38C84 44 74 52 60 52C46 52 36 44 36 38V16L60 2Z" fill="#0d9488" opacity="0.1" stroke="#0d9488" stroke-width="2"/>
+            <path d="M50 28L56 34L70 20" stroke="#0d9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <span class="stat-desc">サービス開始以来、情報漏洩やセキュリティ事故はゼロ。NDA対応可。</span>
