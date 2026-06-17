@@ -109,49 +109,58 @@ section{padding:96px 0}
 .stat-src{font-size:9px;color:var(--muted);opacity:.7;letter-spacing:.02em;text-transform:uppercase;margin-top:8px}
 @media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat-card:nth-child(2){border-right:none}.stat-card:nth-child(3),.stat-card:nth-child(4){border-top:1px solid var(--border)}.stat-label{white-space:normal}}
 
-/* PROBLEMS */
+/* PROBLEMS — seamless rows beside a faded image */
 .prob-bg{background:var(--bg2)}
-.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.prob-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;transition:box-shadow .2s;cursor:pointer}
-.prob-card:hover{box-shadow:0 8px 24px rgba(40,30,10,.06)}
-.prob-card h3{font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.5}
-.prob-card p{font-size:14px;color:var(--sub);line-height:1.8}
-.prob-hint{font-size:12px;color:var(--muted);margin-top:10px;transition:opacity .2s}
-.prob-card.open .prob-hint{opacity:0;height:0;margin:0;overflow:hidden}
-.prob-answer{max-height:0;overflow:hidden;transition:max-height .35s ease,margin .3s ease,padding .3s ease;background:var(--accent-light);border-radius:8px;font-size:14px;color:var(--text);line-height:1.8;padding:0 16px;margin-top:0}
-.prob-card.open .prob-answer{max-height:200px;padding:14px 16px;margin-top:14px}
-.prob-cta{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);margin-top:10px;text-decoration:none}
+.prob-split{display:grid;grid-template-columns:0.82fr 1.18fr;gap:0;margin-top:44px;align-items:stretch}
+.prob-visual{position:relative;border-radius:18px;overflow:hidden;min-height:440px;background:var(--paper2)}
+.pv-img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s ease;filter:saturate(.94)}
+.pv-img.on{opacity:1}
+.prob-visual .fade{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,transparent 38%,var(--bg2) 99%)}
+.prob-visual .grain{position:absolute;inset:0;z-index:3;background-image:var(--grain-soft);background-size:150px 150px;opacity:.12;pointer-events:none}
+.prob-rows{padding:2px 0 2px 46px}
+.prob-row{padding:20px 4px;border-bottom:1px solid var(--border);cursor:pointer}
+.prob-row:last-child{border-bottom:none}
+.prob-row-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
+.prob-row .pr-num{font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.1em}
+.prob-row h3{font-size:16.5px;font-weight:800;line-height:1.5;min-width:0}
+.prob-row .pr-arr{font-size:12px;color:var(--muted);transition:transform .25s}
+.prob-row.open .pr-arr{transform:rotate(180deg)}
+.prob-row .pr-ans{max-height:0;overflow:hidden;transition:max-height .4s ease,margin .3s ease;font-size:13.5px;color:var(--sub);line-height:1.85;padding-left:30px}
+.prob-row.open .pr-ans{max-height:280px;margin-top:10px}
+.prob-cta{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);margin-top:8px;text-decoration:none}
 .prob-cta:hover{text-decoration:underline}
-.prob-num{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:900;color:var(--accent);letter-spacing:.16em;margin-bottom:16px}
-.prob-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent-mid),transparent)}
-.prob-card{position:relative;overflow:hidden}
-.prob-card::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.05;pointer-events:none}
-.prob-card>*{position:relative;z-index:1}
 
-/* CASES — "what you can make" editorial grid (teaser level) */
-.make-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.make-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 26px 26px;overflow:hidden;transition:transform .25s,box-shadow .25s}
-.make-card::before{content:'';position:absolute;inset:0;background:radial-gradient(130% 90% at 100% 0,var(--accent-light),transparent 58%);opacity:.85;pointer-events:none}
-.make-card::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.07;pointer-events:none}
-.make-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(40,30,10,.1)}
-.make-card>*{position:relative;z-index:1}
-.make-num{font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.14em}
-.make-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 12px;border-radius:100px;margin:10px 0 14px;background:var(--accent-mid);color:var(--accent-deep)}
-.make-card h3{font-size:20px;font-weight:900;line-height:1.45;margin-bottom:10px;letter-spacing:-.01em}
-.make-card p{font-size:13.5px;color:var(--sub);line-height:1.78}
-.make-time{margin-top:16px;font-size:12px;font-weight:700;color:var(--muted)}
+/* WHAT YOU CAN MAKE — editorial image rows (only a few shown, rest in the doc) */
+.make-list{margin-top:44px;border-top:1px solid var(--border)}
+.make-row{display:grid;grid-template-columns:1.04fr .96fr;align-items:stretch;border-bottom:1px solid var(--border)}
+.make-figure{position:relative;min-height:300px;background-size:cover;background-position:center;filter:saturate(.96)}
+.make-figure .fade{position:absolute;inset:0;background:linear-gradient(90deg,var(--paper) 1%,transparent 52%)}
+.make-figure .grain{position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.1;pointer-events:none}
+.make-body{padding:44px 56px;display:flex;flex-direction:column;justify-content:center}
+.make-row.rev .make-figure{order:-1}
+.make-row.rev .make-figure .fade{background:linear-gradient(270deg,var(--paper) 1%,transparent 52%)}
+.make-num{font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.16em;margin-bottom:10px}
+.make-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 12px;border-radius:100px;margin-bottom:14px;background:var(--accent-mid);color:var(--accent-deep)}
+.make-body h3{font-size:24px;font-weight:900;line-height:1.4;margin-bottom:12px;letter-spacing:-.01em}
+.make-body p{font-size:14.5px;color:var(--sub);line-height:1.8}
+.make-time{margin-top:18px;font-size:12px;font-weight:700;color:var(--muted)}
 .make-time b{color:var(--accent);font-weight:800}
+.make-more{margin-top:36px;text-align:center;background:linear-gradient(135deg,var(--accent-light),var(--paper2));border:1px solid var(--accent-mid);border-radius:20px;padding:42px 32px;position:relative;overflow:hidden}
+.make-more::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.08;pointer-events:none}
+.make-more>*{position:relative;z-index:1}
+.make-more h3{font-size:23px;font-weight:900;margin-bottom:10px;letter-spacing:-.01em;line-height:1.4}
+.make-more p{font-size:14px;color:var(--sub);line-height:1.85;max-width:560px;margin:0 auto 24px}
 
-/* CASES — small business-outcome reference list */
-.biz-head{margin-top:60px;margin-bottom:6px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+/* business-outcome reference list (no images; wrap-proof grid) */
+.biz-head{margin-top:64px;margin-bottom:8px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .biz-head h3{font-size:21px;font-weight:900;letter-spacing:-.01em}
 .biz-head span{font-size:13px;color:var(--muted)}
-.biz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 36px}
-.biz-item{display:flex;gap:14px;align-items:center;padding:14px 2px;border-bottom:1px solid var(--border)}
-.bz-tag{font-size:10.5px;font-weight:800;color:var(--accent-deep);background:var(--accent-light);padding:3px 0;border-radius:6px;flex-shrink:0;width:62px;text-align:center;letter-spacing:.02em}
-.bz-txt{font-size:13.5px;color:var(--sub);line-height:1.55;flex:1}
+.biz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.biz-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:15px 2px;border-bottom:1px solid var(--border)}
+.bz-tag{font-size:10.5px;font-weight:800;color:var(--accent-deep);background:var(--accent-light);padding:4px 0;border-radius:6px;width:54px;text-align:center;letter-spacing:.02em}
+.bz-txt{font-size:13.5px;color:var(--sub);line-height:1.5;min-width:0}
 .bz-txt b{color:var(--text);font-weight:700}
-.bz-res{font-size:12px;font-weight:800;color:var(--accent);white-space:nowrap;flex-shrink:0}
+.bz-res{font-size:12px;font-weight:800;color:var(--accent);white-space:nowrap}
 
 /* FLOW — bespoke grainy-gradient timeline (drops the uniform card grid) */
 .flow-wrap{position:relative;margin-top:8px}
@@ -205,12 +214,20 @@ footer a:hover{color:var(--text)}
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .prob-grid{grid-template-columns:1fr}
-  .make-grid{grid-template-columns:1fr}
   .biz-grid{grid-template-columns:1fr}
   .flow-steps{grid-template-columns:1fr;gap:32px}
   .flow-line{display:none}
   .price-grid{grid-template-columns:1fr}
+  /* PROBLEMS stack: image becomes a top banner fading downward */
+  .prob-split{grid-template-columns:1fr}
+  .prob-visual{min-height:200px;border-radius:14px}
+  .prob-visual .fade{background:linear-gradient(180deg,transparent 30%,var(--bg2) 100%)}
+  .prob-rows{padding:18px 0 2px}
+  /* MAKE rows stack: image on top, fading downward into the text */
+  .make-row,.make-row.rev{grid-template-columns:1fr}
+  .make-figure,.make-row.rev .make-figure{order:-1;min-height:200px}
+  .make-figure .fade,.make-row.rev .make-figure .fade{background:linear-gradient(180deg,transparent 34%,var(--paper) 100%)}
+  .make-body{padding:28px 28px 36px}
   .nav-links{display:none}
   .hero-inner{grid-template-columns:1fr}
   .hero-bubbles{display:none}
@@ -385,42 +402,41 @@ footer a:hover{color:var(--text)}
     <div class="sec-label">PROBLEM</div>
     <h2 class="sec-title">こんなこと、感じていませんか？</h2>
     <p class="sec-lead">「AIが気になる。でも何から始めれば…」その悩み、あなただけではありません。</p>
-    <div class="prob-grid">
-      <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-num">01</div>
-        <h3>AIって話題だけど、うちに関係ある？</h3>
-        <p>ChatGPTやClaudeは知ってる。でも自分の会社のどの業務に使えるのかピンとこない。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">明朗会計AIでは、無料ヒアリングであなたの業務を聞き取り、AIで自動化できるポイントを具体的にご提案します。「うちでは使えない」と思っていた会社ほど、驚くケースが多いです。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
+    <div class="prob-split">
+      <div class="prob-visual">
+        <div class="pv-img on" style="background-image:url('assets/problem1.jpg')"></div>
+        <div class="pv-img" style="background-image:url('assets/problem2.jpg')"></div>
+        <div class="pv-img" style="background-image:url('assets/problem3.jpg')"></div>
+        <div class="pv-img" style="background-image:url('assets/problem4.jpg')"></div>
+        <div class="pv-img" style="background-image:url('assets/problem5.jpg')"></div>
+        <div class="pv-img" style="background-image:url('assets/problem6.jpg')"></div>
+        <div class="fade"></div><div class="grain"></div>
       </div>
-      <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-num">02</div>
-        <h3>毎月同じ作業に時間を取られている</h3>
-        <p>請求書の作成、レポートの集計、問い合わせ対応…。手作業をやめたいけど、仕組みを作る余裕がない。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">繰り返し作業こそAIの得意分野。請求書の自動生成やレポートのドラフト作成など、仕組みの構築はすべてこちらで行います。あなたは「これが面倒」と言うだけ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
-      </div>
-      <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-num">03</div>
-        <h3>IT担当がいない</h3>
-        <p>社内にエンジニアはいない。外注すると高いし、何を頼めばいいかもわからない。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">エンジニア不要です。設計・構築・レクチャーまですべて明朗会計AIが担当。納品後は社員の方がそのまま使えるレベルに仕上げます。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
-      </div>
-      <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-num">04</div>
-        <h3>AI導入は高そう</h3>
-        <p>大企業向けのサービスばかり。月100万円のコンサルは無理。うちの規模に合う選択肢がほしい。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">明朗会計AIは中小企業に特化。¥300,000〜の明朗会計で、追加料金なし。初期相談は無料なので、まず見積もりだけでもどうぞ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
-      </div>
-      <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-num">05</div>
-        <h3>ExcelやGoogleスプレッドシートで限界</h3>
-        <p>データは溜まってるのに、活用できてない。毎回手作業で集計してる。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">既存のスプレッドシートやシステムはそのまま。AIが裏側でデータを読み取り、集計・分析・レポート化を自動で行います。ツールを変える必要はありません。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
-      </div>
-      <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-num">06</div>
-        <h3>導入してもうちのスタッフが使えるか不安</h3>
-        <p>最新ツールを入れても使いこなせなかったら意味がない。教育コストも心配。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">「使いこなす」必要はありません。普段の操作（メール、スプレッドシート等）をするだけでAIが裏で動く設計。操作レクチャーとマニュアルも付きます。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
+      <div class="prob-rows">
+        <div class="prob-row" onmouseenter="probImg(0)" onclick="this.classList.toggle('open')">
+          <div class="prob-row-head"><span class="pr-num">01</span><h3>AIって話題だけど、うちに関係ある？</h3><span class="pr-arr">▼</span></div>
+          <div class="pr-ans">ChatGPTやClaudeは知ってるけど、どの業務に使えるか分からない——無料ヒアリングで、あなたの仕事から“AIで楽になる所”を具体的に見つけます。<a href="#contact" class="prob-cta">無料で相談する →</a></div>
+        </div>
+        <div class="prob-row" onmouseenter="probImg(1)" onclick="this.classList.toggle('open')">
+          <div class="prob-row-head"><span class="pr-num">02</span><h3>毎月、同じ作業に時間を取られている</h3><span class="pr-arr">▼</span></div>
+          <div class="pr-ans">請求書・レポート・問い合わせ…繰り返し作業こそAIの得意分野。仕組みづくりは全部こちら、あなたは「これが面倒」と言うだけ。<a href="#contact" class="prob-cta">無料で相談する →</a></div>
+        </div>
+        <div class="prob-row" onmouseenter="probImg(2)" onclick="this.classList.toggle('open')">
+          <div class="prob-row-head"><span class="pr-num">03</span><h3>社内にIT担当・エンジニアがいない</h3><span class="pr-arr">▼</span></div>
+          <div class="pr-ans">エンジニアは不要です。設計・構築・レクチャーまで一括対応。納品後は社員の方がそのまま使える状態に仕上げます。<a href="#contact" class="prob-cta">無料で相談する →</a></div>
+        </div>
+        <div class="prob-row" onmouseenter="probImg(3)" onclick="this.classList.toggle('open')">
+          <div class="prob-row-head"><span class="pr-num">04</span><h3>AI導入って、高そう…</h3><span class="pr-arr">▼</span></div>
+          <div class="pr-ans">大企業向けの月100万コンサルとは違います。¥300,000〜の明朗会計・追加料金なし。初回相談は無料なので、見積もりだけでもどうぞ。<a href="#contact" class="prob-cta">無料で相談する →</a></div>
+        </div>
+        <div class="prob-row" onmouseenter="probImg(4)" onclick="this.classList.toggle('open')">
+          <div class="prob-row-head"><span class="pr-num">05</span><h3>Excelやスプレッドシートで、もう限界</h3><span class="pr-arr">▼</span></div>
+          <div class="pr-ans">今のスプレッドシートはそのまま。AIが裏側で読み取り・集計・レポート化まで自動で。ツールを変える必要はありません。<a href="#contact" class="prob-cta">無料で相談する →</a></div>
+        </div>
+        <div class="prob-row" onmouseenter="probImg(5)" onclick="this.classList.toggle('open')">
+          <div class="prob-row-head"><span class="pr-num">06</span><h3>導入しても、スタッフが使えるか不安</h3><span class="pr-arr">▼</span></div>
+          <div class="pr-ans">「使いこなす」必要はありません。普段の操作をするだけでAIが裏で動く設計。操作レクチャーとマニュアルも付きます。<a href="#contact" class="prob-cta">無料で相談する →</a></div>
+        </div>
       </div>
     </div>
   </div>
@@ -431,57 +447,43 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <div class="sec-label">WHAT YOU CAN MAKE</div>
     <h2 class="sec-title">AIで、<em>こんなものが作れます</em></h2>
-    <p class="sec-lead">「うちには関係ない」と思っていたことほど、形になります。話すだけで作れる、代表的な7つ。</p>
-    <div class="make-grid">
-      <div class="make-card">
-        <div class="make-num">01</div>
-        <span class="make-tag">ホームページ</span>
-        <h3>思いついたその日に、自分のサイトが持てる。</h3>
-        <p>「カフェのページを作りたい」と話すだけ。文章もデザインもAIが整え、その日に公開できる本物のサイトに。</p>
-        <div class="make-time">かかる時間 <b>最短30分</b></div>
+    <p class="sec-lead">「うちには関係ない」と思っていたことほど、形になります。たとえば、こんなもの。</p>
+    <div class="make-list">
+      <div class="make-row">
+        <div class="make-body">
+          <div class="make-num">01</div>
+          <span class="make-tag">ホームページ</span>
+          <h3>思いついたその日に、<br>自分のサイトが持てる。</h3>
+          <p>「カフェのページを作りたい」と話すだけ。文章もデザインもAIが整え、その日に公開できる本物のサイトに。</p>
+          <div class="make-time">かかる時間 <b>最短30分</b></div>
+        </div>
+        <div class="make-figure" style="background-image:url('assets/case1.jpg')"><div class="fade"></div><div class="grain"></div></div>
       </div>
-      <div class="make-card">
-        <div class="make-num">02</div>
-        <span class="make-tag">占い・診断</span>
-        <h3>話しかけると占ってくれる、自分だけのチャット。</h3>
-        <p>「今日の運勢を占って」に答えるチャットが完成。SNSで配れば、つい試したくなる集客コンテンツに。</p>
-        <div class="make-time">かかる時間 <b>その日</b></div>
+      <div class="make-row rev">
+        <div class="make-body">
+          <div class="make-num">02</div>
+          <span class="make-tag">接客チャット</span>
+          <h3>24時間、代わりに接客する<br>“もう一人の自分”。</h3>
+          <p>「予約したい」「営業時間は?」によくある質問にAIが即返信。あなたが寝ている間も、お店を開けておけます。</p>
+          <div class="make-time">かかる時間 <b>数日</b></div>
+        </div>
+        <div class="make-figure" style="background-image:url('assets/case3.jpg')"><div class="fade"></div><div class="grain"></div></div>
       </div>
-      <div class="make-card">
-        <div class="make-num">03</div>
-        <span class="make-tag">接客チャット</span>
-        <h3>24時間、代わりに接客してくれる“もう一人”。</h3>
-        <p>「予約したい」「営業時間は?」によくある質問にAIが即返信。あなたが寝ている間も、お店を開けておけます。</p>
-        <div class="make-time">かかる時間 <b>数日</b></div>
+      <div class="make-row">
+        <div class="make-body">
+          <div class="make-num">03</div>
+          <span class="make-tag">画像・ロゴ・チラシ</span>
+          <h3>ロゴもチラシも画像も、<br>“それっぽい”がすぐ揃う。</h3>
+          <p>「カフェっぽいロゴを5案」と頼むだけ。気に入らなければ何度でも。外注費も待ち時間もかかりません。</p>
+          <div class="make-time">かかる時間 <b>その場で</b></div>
+        </div>
+        <div class="make-figure" style="background-image:url('assets/case5.jpg')"><div class="fade"></div><div class="grain"></div></div>
       </div>
-      <div class="make-card">
-        <div class="make-num">04</div>
-        <span class="make-tag">相棒AI</span>
-        <h3>あなたを分かっている、専用のAIをセットアップ。</h3>
-        <p>仕事・口調・よく使う情報を覚えた“あなた専用”のAI。毎回ゼロから説明せず「いつものやつ」が通じます。</p>
-        <div class="make-time">かかる時間 <b>その日</b></div>
-      </div>
-      <div class="make-card">
-        <div class="make-num">05</div>
-        <span class="make-tag">画像・ロゴ</span>
-        <h3>ロゴもチラシも画像も、“それっぽい”がすぐ揃う。</h3>
-        <p>「カフェっぽいロゴを5案」と頼むだけ。気に入らなければ何度でも。外注費も待ち時間もかかりません。</p>
-        <div class="make-time">かかる時間 <b>その場で</b></div>
-      </div>
-      <div class="make-card">
-        <div class="make-num">06</div>
-        <span class="make-tag">SNS・文章</span>
-        <h3>「今日、何を投稿しよう」から解放される。</h3>
-        <p>あなたの“らしさ”を覚えたAIが、ネタ出しから本文まで提案。自分の声を保ったまま、発信が続きます。</p>
-        <div class="make-time">かかる時間 <b>その日</b></div>
-      </div>
-      <div class="make-card">
-        <div class="make-num">07</div>
-        <span class="make-tag">議事録</span>
-        <h3>会議や打ち合わせが、勝手にまとまっている。</h3>
-        <p>録音を渡すと、文字起こし→要点だけの議事録→「誰が何をやるか」まで自動で。会議中はメモ取り不要に。</p>
-        <div class="make-time">かかる時間 <b>その場で</b></div>
-      </div>
+    </div>
+    <div class="make-more">
+      <h3>作れるものは、まだまだあります。</h3>
+      <p>占いチャット、あなた専用の“相棒AI”、SNSの投稿文、会議の議事録まで——ぜんぶ「話すだけ」。全種類の作り方と実例は、無料の資料でまとめてご紹介しています。</p>
+      <a href="#contact" class="btn-primary" style="text-decoration:none;display:inline-block">資料を無料で受け取る →</a>
     </div>
     <div class="biz-head">
       <h3>さらに、日々の業務もこう変わります</h3>
@@ -647,6 +649,12 @@ footer a:hover{color:var(--text)}
 function activateBubble(el){
   document.querySelectorAll('.bubble').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
+}
+
+// PROBLEM: swap the left visual to match the hovered row (crossfade via CSS)
+function probImg(i){
+  var imgs=document.querySelectorAll('.prob-visual .pv-img');
+  imgs.forEach(function(im,n){im.classList.toggle('on',n===i);});
 }
 
 // --- Film grain, generated as a PNG at runtime ---------------------------
