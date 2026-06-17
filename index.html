@@ -5,43 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>明朗会計AI — 中小企業のための、やさしいAI活用</title>
 <meta name="description" content="AI導入って難しそう？実は、気づいたら業務が楽になっていた——そんな導入のかたちがあります。中小企業に特化した、わかりやすいAI活用支援。">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <script async src="https://tally.so/widgets/embed.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --accent:#0d9488;--accent-light:#f0fdfa;--accent-mid:#ccfbf1;
-  --text:#1e293b;--sub:#475569;--muted:#94a3b8;
-  --bg:#ffffff;--bg2:#f8fafc;--border:#e2e8f0;
-  --radius:12px;--max-w:960px;
+  --accent:#0d9488;--accent-deep:#0b7d72;--accent-bright:#14b8a6;--accent-light:#e9f6f3;--accent-mid:#cdeee6;
+  --text:#23201b;--sub:#524d44;--muted:#9b9486;
+  --paper:#f3efe6;--paper2:#ece5d8;
+  --bg:#ffffff;--bg2:#ece5d8;--border:#e3dccc;
+  --radius:14px;--max-w:960px;
+  /* grain is generated as a PNG at runtime (see script) so it renders crisply */
+  --grain:none;--grain-soft:none;
 }
-html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;color:var(--text);background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text);background:var(--paper);line-height:1.8;-webkit-font-smoothing:antialiased;position:relative}
+
+/* PAPER GRAIN — light film over the whole page; keeps text crisp */
+body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:var(--grain);background-size:160px 160px;opacity:.06}
+
+/* GRAINY COLOR BANDS — spray-edged diagonal bands */
+.band{position:absolute;z-index:0;pointer-events:none;background-color:var(--accent);background-image:var(--grain-soft);background-size:170px 170px}
+.band.deep{background-color:var(--accent-deep)}
+.band.fade-l{-webkit-mask-image:linear-gradient(95deg,transparent 0%,#000 22%);mask-image:linear-gradient(95deg,transparent 0%,#000 22%)}
+.band.fade-r{-webkit-mask-image:linear-gradient(265deg,transparent 0%,#000 22%);mask-image:linear-gradient(265deg,transparent 0%,#000 22%)}
 .wrap{max-width:var(--max-w);margin:0 auto;padding:0 24px}
 img{max-width:100%;display:block}
 a{color:var(--accent);text-decoration:none}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(243,239,230,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:60px}
 .nav-inner{max-width:var(--max-w);margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
 .nav-logo{font-size:18px;font-weight:900;color:var(--text)}
 .nav-logo span{color:var(--accent)}
 .nav-links{display:flex;gap:20px}
 .nav-links a{font-size:13px;color:var(--sub);text-decoration:none;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--accent)}
-.nav-cta{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
-.nav-cta:hover{background:#0f766e}
+.nav-cta{background:linear-gradient(135deg,var(--accent-bright),var(--accent-deep));color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:filter .2s}
+.nav-cta:hover{filter:brightness(1.06)}
 
 /* HERO */
-.hero{padding:140px 0 80px;text-align:left}
+.hero{padding:140px 0 80px;text-align:left;position:relative;overflow:hidden;background:radial-gradient(900px 520px at 82% -8%,var(--accent-light),transparent 58%),linear-gradient(180deg,#f7f3ea,var(--paper) 38%)}
+.hero .band-a{width:1400px;height:420px;top:-200px;right:-340px;transform:rotate(-13deg);opacity:.9}
+.hero .band-b{width:1400px;height:300px;top:60px;right:-280px;transform:rotate(-13deg);opacity:.95}
+.hero .wrap{position:relative;z-index:2}
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .hero-badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:14px;font-weight:700;padding:6px 20px;border-radius:100px;margin-bottom:28px}
 .hero h1{font-size:clamp(32px,5vw,48px);font-weight:900;line-height:1.4;margin-bottom:24px;letter-spacing:-.02em}
 .hero h1 em{font-style:normal;color:var(--accent)}
 .hero-lead{font-size:15px;color:var(--sub);max-width:480px;margin:0 0 36px;line-height:1.8}
 .hero-btns{display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 4px 16px rgba(13,148,136,.25)}
-.btn-primary:hover{background:#0f766e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,148,136,.3)}
+.btn-primary{background:linear-gradient(135deg,var(--accent-bright),var(--accent-deep));color:#fff;padding:16px 40px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 8px 22px rgba(13,148,136,.28)}
+.btn-primary:hover{filter:brightness(1.06);transform:translateY(-2px);box-shadow:0 12px 30px rgba(13,148,136,.34)}
 .btn-ghost{background:transparent;color:var(--sub);border:1.5px solid var(--border);padding:16px 32px;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .2s}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
 .hero-trust{display:flex;justify-content:flex-start;gap:28px;margin-top:36px;flex-wrap:wrap}
@@ -50,8 +65,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 
 /* Hero bubbles */
 .hero-bubbles{position:relative;height:400px}
-.bubble{position:absolute;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:14px 18px;font-size:14px;font-weight:500;color:var(--text);line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0,.06);max-width:240px;transition:transform .3s ease}
-.bubble:hover{transform:translateY(-4px) !important;box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.bubble{position:absolute;background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:14px 18px;font-size:14px;font-weight:500;color:var(--text);line-height:1.6;box-shadow:0 4px 20px rgba(40,30,10,.06);max-width:240px;transition:transform .3s ease}
+.bubble:hover{transform:translateY(-4px) !important;box-shadow:0 8px 28px rgba(40,30,10,.12)}
 .bubble.active{border-color:var(--accent);z-index:10;transform:scale(1.04) !important;box-shadow:0 12px 32px rgba(13,148,136,.15)}
 .bubble::after{content:'';position:absolute;bottom:-8px;left:24px;width:16px;height:16px;background:var(--bg);border-right:1px solid var(--border);border-bottom:1px solid var(--border);transform:rotate(45deg)}
 .bubble.right::after{left:auto;right:24px}
@@ -73,11 +88,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 /* SECTION */
 section{padding:96px 0}
 .sec-label{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
-.sec-title{font-size:clamp(26px,3.5vw,40px);font-weight:900;line-height:1.4;margin-bottom:16px}
+.sec-title{font-size:clamp(26px,3.5vw,40px);font-weight:900;line-height:1.4;margin-bottom:16px;letter-spacing:-.02em}
+.sec-title em{font-style:normal;color:var(--accent)}
 .sec-lead{font-size:16px;color:var(--sub);max-width:560px;line-height:1.9;margin-bottom:48px}
 
 /* STATS */
-.stats-section{padding:64px 0;background:var(--bg)}
+.stats-section{padding:64px 0;background:transparent}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .stat-card{padding:28px 24px;border-right:1px solid var(--border);background:var(--bg);transition:background .2s;display:flex;flex-direction:column}
 .stat-card:last-child{border-right:none}
@@ -97,7 +113,7 @@ section{padding:96px 0}
 .prob-bg{background:var(--bg2)}
 .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .prob-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;transition:box-shadow .2s;cursor:pointer}
-.prob-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.prob-card:hover{box-shadow:0 8px 24px rgba(40,30,10,.06)}
 .prob-card h3{font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.5}
 .prob-card p{font-size:14px;color:var(--sub);line-height:1.8}
 .prob-hint{font-size:12px;color:var(--muted);margin-top:10px;transition:opacity .2s}
@@ -109,43 +125,47 @@ section{padding:96px 0}
 .prob-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--accent-light)}
 .prob-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* CASES */
-.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.case-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;transition:box-shadow .2s}
-.case-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
-.case-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:12px}
-.case-tag.ops{background:#dbeafe;color:#1e40af}
-.case-tag.sales{background:#fce7f3;color:#be185d}
-.case-tag.dev{background:#d1fae5;color:#065f46}
-.case-tag.mkt{background:#fef3c7;color:#92400e}
-.case-card h3{font-size:24px;font-weight:900;margin-bottom:12px;line-height:1.4}
-.case-card .case-footer{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px}
-.case-detail{font-size:12px;font-weight:400;color:var(--muted);text-decoration:none}
-.case-detail:hover{color:var(--sub)}
-.case-card p{font-size:14px;color:var(--sub);line-height:1.7}
-.case-result{font-size:14px;font-weight:700;color:var(--accent);margin-top:12px}
+/* CASES — "what you can make" editorial grid (teaser level) */
+.make-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.make-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 26px 26px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.make-card::before{content:'';position:absolute;inset:0;background:radial-gradient(130% 90% at 100% 0,var(--accent-light),transparent 58%);opacity:.85;pointer-events:none}
+.make-card::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.07;pointer-events:none}
+.make-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(40,30,10,.1)}
+.make-card>*{position:relative;z-index:1}
+.make-num{font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.14em}
+.make-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 12px;border-radius:100px;margin:10px 0 14px;background:var(--accent-mid);color:var(--accent-deep)}
+.make-card h3{font-size:20px;font-weight:900;line-height:1.45;margin-bottom:10px;letter-spacing:-.01em}
+.make-card p{font-size:13.5px;color:var(--sub);line-height:1.78}
+.make-time{margin-top:16px;font-size:12px;font-weight:700;color:var(--muted)}
+.make-time b{color:var(--accent);font-weight:800}
 
-/* FLOW */
-.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.flow-step{text-align:center;padding:32px 20px}
-.flow-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:left;position:relative}
-.flow-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
-.flow-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.flow-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.flow-tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;flex-shrink:0}
-.flow-tag.hearing{background:#dbeafe;color:#1e40af}
-.flow-tag.build{background:#d1fae5;color:#065f46}
-.flow-tag.deliver{background:#fef3c7;color:#92400e}
-.flow-icon{width:44px;height:44px;border-radius:12px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto}
-.flow-icon svg{width:20px;height:20px}
-.flow-card h3{font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.4}
-.flow-card p{font-size:14px;color:var(--sub);line-height:1.7}
-.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px;padding:0 4px}
+/* CASES — small business-outcome reference list */
+.biz-head{margin-top:60px;margin-bottom:6px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.biz-head h3{font-size:21px;font-weight:900;letter-spacing:-.01em}
+.biz-head span{font-size:13px;color:var(--muted)}
+.biz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 36px}
+.biz-item{display:flex;gap:14px;align-items:center;padding:14px 2px;border-bottom:1px solid var(--border)}
+.bz-tag{font-size:10.5px;font-weight:800;color:var(--accent-deep);background:var(--accent-light);padding:3px 0;border-radius:6px;flex-shrink:0;width:62px;text-align:center;letter-spacing:.02em}
+.bz-txt{font-size:13.5px;color:var(--sub);line-height:1.55;flex:1}
+.bz-txt b{color:var(--text);font-weight:700}
+.bz-res{font-size:12px;font-weight:800;color:var(--accent);white-space:nowrap;flex-shrink:0}
+
+/* FLOW — bespoke grainy-gradient timeline (drops the uniform card grid) */
+.flow-wrap{position:relative;margin-top:8px}
+.flow-line{position:absolute;left:9%;right:9%;top:23px;height:10px;border-radius:8px;background:linear-gradient(90deg,var(--accent-bright),var(--accent) 55%,var(--accent-deep));z-index:1;overflow:hidden}
+.flow-line::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:140px 140px;opacity:.55}
+.flow-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;position:relative;z-index:2}
+.fstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px}
+.fstep-dot{width:56px;height:56px;border-radius:50%;background:var(--paper);border:3px solid var(--accent);color:var(--accent);font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(13,148,136,.22);margin-bottom:22px}
+.fstep-time{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.06em;background:var(--accent-light);padding:4px 14px;border-radius:100px;margin-bottom:14px}
+.fstep h3{font-size:19px;font-weight:900;margin-bottom:8px;letter-spacing:-.01em;line-height:1.4}
+.fstep p{font-size:14px;color:var(--sub);line-height:1.85;max-width:280px}
 
 /* PRICING */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
 .plan{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;position:relative}
 .plan.feat{border-color:var(--accent);border-width:2px}
+.plan.feat::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(130% 78% at 50% -12%,var(--accent-light),transparent 56%);pointer-events:none;z-index:-1}
 .plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:4px 18px;border-radius:100px}
 .plan-name{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
 .plan-price{font-size:32px;font-weight:900;margin-bottom:4px}
@@ -154,8 +174,8 @@ section{padding:96px 0}
 .plan-list li{font-size:14px;color:var(--sub);padding:8px 0;border-bottom:1px solid var(--bg2);display:flex;align-items:flex-start;gap:8px}
 .plan-list li::before{content:'✓';color:var(--accent);font-weight:700;font-size:13px}
 .plan-btn{display:block;width:100%;padding:14px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;font-family:inherit;transition:all .2s;border:none}
-.plan-btn-fill{background:var(--accent);color:#fff}
-.plan-btn-fill:hover{background:#0f766e}
+.plan-btn-fill{background:linear-gradient(135deg,var(--accent-bright),var(--accent-deep));color:#fff}
+.plan-btn-fill:hover{filter:brightness(1.06)}
 .plan-btn-out{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
 .plan-btn-out:hover{background:var(--accent-light)}
 
@@ -183,9 +203,10 @@ footer a:hover{color:var(--text)}
 /* RESPONSIVE */
 @media(max-width:768px){
   .prob-grid{grid-template-columns:1fr}
-  #flow .wrap > div{grid-template-columns:1fr !important}
-  .flow-arrow{transform:rotate(90deg);padding:8px 0}
-  .case-grid{grid-template-columns:1fr}
+  .make-grid{grid-template-columns:1fr}
+  .biz-grid{grid-template-columns:1fr}
+  .flow-steps{grid-template-columns:1fr;gap:32px}
+  .flow-line{display:none}
   .price-grid{grid-template-columns:1fr}
   .nav-links{display:none}
   .hero-inner{grid-template-columns:1fr}
@@ -218,6 +239,8 @@ footer a:hover{color:var(--text)}
 
 <!-- HERO -->
 <section class="hero">
+  <div class="band band-a fade-l"></div>
+  <div class="band band-b deep fade-l"></div>
   <div class="wrap">
     <div class="hero-inner">
       <div class="hero-text">
@@ -382,7 +405,7 @@ footer a:hover{color:var(--text)}
         <div class="prob-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
         <h3>AI導入は高そう</h3>
         <p>大企業向けのサービスばかり。月100万円のコンサルは無理。うちの規模に合う選択肢がほしい。</p>
-        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">明朗会計AIは中小企業に特化。¥148,000〜の明朗会計で、追加料金なし。初期相談は無料なので、まず見積もりだけでもどうぞ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
+        <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">明朗会計AIは中小企業に特化。¥300,000〜の明朗会計で、追加料金なし。初期相談は無料なので、まず見積もりだけでもどうぞ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
       <div class="prob-card" onclick="this.classList.toggle('open')">
         <div class="prob-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
@@ -403,59 +426,75 @@ footer a:hover{color:var(--text)}
 <!-- CASES -->
 <section id="cases">
   <div class="wrap">
-    <div class="sec-label">CASES</div>
-    <h2 class="sec-title">実際に、こんな会社が変わりました</h2>
-    <p class="sec-lead">「やってみたら意外とカンタンだった」が全社共通の感想です。</p>
-    <div class="case-grid">
-      <div class="case-card">
-        <span class="case-tag ops">経理</span>
-        <h3>請求書づくりを自動化。<br>月末の残業がほぼゼロに。</h3>
-        <p>毎月手で作っていた請求書を、ボタン一つでPDF生成→メール送信まで。経理担当の月末が劇的に変わった。</p>
-        <div class="case-footer"><div class="case-result">作業時間 40h → 8h（80%削減）</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+    <div class="sec-label">WHAT YOU CAN MAKE</div>
+    <h2 class="sec-title">AIで、<em>こんなものが作れます</em></h2>
+    <p class="sec-lead">「うちには関係ない」と思っていたことほど、形になります。話すだけで作れる、代表的な7つ。</p>
+    <div class="make-grid">
+      <div class="make-card">
+        <div class="make-num">01</div>
+        <span class="make-tag">ホームページ</span>
+        <h3>思いついたその日に、自分のサイトが持てる。</h3>
+        <p>「カフェのページを作りたい」と話すだけ。文章もデザインもAIが整え、その日に公開できる本物のサイトに。</p>
+        <div class="make-time">かかる時間 <b>最短30分</b></div>
       </div>
-      <div class="case-card">
-        <span class="case-tag sales">採用</span>
-        <h3>履歴書チェックをAIに任せたら、<br>採用がスムーズに。</h3>
-        <p>毎回100件以上の応募書類を目で確認していた作業を、AIが一次選考。人が見るべき候補だけに集中できるように。</p>
-        <div class="case-footer"><div class="case-result">選考の手間 70%削減</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+      <div class="make-card">
+        <div class="make-num">02</div>
+        <span class="make-tag">占い・診断</span>
+        <h3>話しかけると占ってくれる、自分だけのチャット。</h3>
+        <p>「今日の運勢を占って」に答えるチャットが完成。SNSで配れば、つい試したくなる集客コンテンツに。</p>
+        <div class="make-time">かかる時間 <b>その日</b></div>
       </div>
-      <div class="case-card">
-        <span class="case-tag ops">カスタマー</span>
-        <h3>よくある問い合わせは、<br>AIが24時間対応。</h3>
-        <p>「営業時間は？」「返品できる？」——こうした定番の質問はAIチャットボットが即回答。スタッフは難しい案件だけに集中。</p>
-        <div class="case-footer"><div class="case-result">対応の手間 50%削減</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+      <div class="make-card">
+        <div class="make-num">03</div>
+        <span class="make-tag">接客チャット</span>
+        <h3>24時間、代わりに接客してくれる“もう一人”。</h3>
+        <p>「予約したい」「営業時間は?」によくある質問にAIが即返信。あなたが寝ている間も、お店を開けておけます。</p>
+        <div class="make-time">かかる時間 <b>数日</b></div>
       </div>
-      <div class="case-card">
-        <span class="case-tag ops">総務</span>
-        <h3>議事録が5分で完成。<br>もう手で書かなくていい。</h3>
-        <p>会議の録音データからAIが自動で議事録をドラフト。担当者によるバラつきもなくなり、品質も安定。</p>
-        <div class="case-footer"><div class="case-result">1件あたり 30分 → 5分</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+      <div class="make-card">
+        <div class="make-num">04</div>
+        <span class="make-tag">相棒AI</span>
+        <h3>あなたを分かっている、専用のAIをセットアップ。</h3>
+        <p>仕事・口調・よく使う情報を覚えた“あなた専用”のAI。毎回ゼロから説明せず「いつものやつ」が通じます。</p>
+        <div class="make-time">かかる時間 <b>その日</b></div>
       </div>
-      <div class="case-card">
-        <span class="case-tag dev">経営</span>
-        <h3>「うちに使える補助金ある？」<br>で答えが返ってくる。</h3>
-        <p>複雑な補助金制度を、普通の言葉で検索できるAIツールを構築。調べものに数日かかっていたのが数分に。</p>
-        <div class="case-footer"><div class="case-result">調査時間 数日 → 数分</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+      <div class="make-card">
+        <div class="make-num">05</div>
+        <span class="make-tag">画像・ロゴ</span>
+        <h3>ロゴもチラシも画像も、“それっぽい”がすぐ揃う。</h3>
+        <p>「カフェっぽいロゴを5案」と頼むだけ。気に入らなければ何度でも。外注費も待ち時間もかかりません。</p>
+        <div class="make-time">かかる時間 <b>その場で</b></div>
       </div>
-      <div class="case-card">
-        <span class="case-tag mkt">営業</span>
-        <h3>業界ニュースが毎朝、<br>勝手にまとまって届く。</h3>
-        <p>営業担当が個別に集めていた競合情報を、AIが自動収集・要約してSlackに毎朝配信。朝の準備時間がゼロに。</p>
-        <div class="case-footer"><div class="case-result">情報収集の手間 → ゼロ</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+      <div class="make-card">
+        <div class="make-num">06</div>
+        <span class="make-tag">SNS・文章</span>
+        <h3>「今日、何を投稿しよう」から解放される。</h3>
+        <p>あなたの“らしさ”を覚えたAIが、ネタ出しから本文まで提案。自分の声を保ったまま、発信が続きます。</p>
+        <div class="make-time">かかる時間 <b>その日</b></div>
       </div>
-      <div class="case-card">
-        <span class="case-tag ops">店舗運営</span>
-        <h3>シフト表が自動で出来上がる。<br>もう悩まない。</h3>
-        <p>スタッフの希望と条件をAIが読み取り、最適なシフトを自動生成。店長が毎月2時間かけていた作業が不要に。</p>
-        <div class="case-footer"><div class="case-result">シフト作成 → 完全自動</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
-      </div>
-      <div class="case-card">
-        <span class="case-tag ops">営業事務</span>
-        <h3>名刺を撮るだけ。<br>手入力ゼロで連絡先に反映。</h3>
-        <p>もらった名刺をスマホで撮影→AIが読み取り→Google連絡先に自動登録。外部サービスなし、社内で完結。</p>
-        <div class="case-footer"><div class="case-result">名刺入力 → 完全ゼロ</div><a href="#contact" class="case-detail">詳しく見る →</a></div>
+      <div class="make-card">
+        <div class="make-num">07</div>
+        <span class="make-tag">議事録</span>
+        <h3>会議や打ち合わせが、勝手にまとまっている。</h3>
+        <p>録音を渡すと、文字起こし→要点だけの議事録→「誰が何をやるか」まで自動で。会議中はメモ取り不要に。</p>
+        <div class="make-time">かかる時間 <b>その場で</b></div>
       </div>
     </div>
+    <div class="biz-head">
+      <h3>さらに、日々の業務もこう変わります</h3>
+      <span>導入企業で実際に起きた変化</span>
+    </div>
+    <div class="biz-grid">
+      <div class="biz-item"><span class="bz-tag">経理</span><span class="bz-txt"><b>請求書づくりを自動化</b>、月末の残業がほぼゼロに</span><span class="bz-res">40h→8h</span></div>
+      <div class="biz-item"><span class="bz-tag">採用</span><span class="bz-txt"><b>応募書類の一次選考</b>をAIに任せる</span><span class="bz-res">手間70%減</span></div>
+      <div class="biz-item"><span class="bz-tag">接客</span><span class="bz-txt"><b>よくある問い合わせ</b>を24時間自動で対応</span><span class="bz-res">手間50%減</span></div>
+      <div class="biz-item"><span class="bz-tag">総務</span><span class="bz-txt"><b>会議の録音から議事録</b>を自動ドラフト</span><span class="bz-res">30分→5分</span></div>
+      <div class="biz-item"><span class="bz-tag">経営</span><span class="bz-txt"><b>使える補助金</b>を普通の言葉で検索</span><span class="bz-res">数日→数分</span></div>
+      <div class="biz-item"><span class="bz-tag">営業</span><span class="bz-txt"><b>業界ニュース</b>を毎朝、自動で要約配信</span><span class="bz-res">準備→ゼロ</span></div>
+      <div class="biz-item"><span class="bz-tag">店舗</span><span class="bz-txt"><b>希望を読み取りシフト表</b>を自動生成</span><span class="bz-res">完全自動</span></div>
+      <div class="biz-item"><span class="bz-tag">事務</span><span class="bz-txt"><b>名刺を撮るだけ</b>で連絡先に自動登録</span><span class="bz-res">入力→ゼロ</span></div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--muted);margin-top:34px">※ 一つひとつの詳しい作り方・活用イメージは、<a href="#contact" style="color:var(--accent);font-weight:700">無料の資料</a>でご紹介しています。</p>
   </div>
 </section>
 
@@ -463,37 +502,29 @@ footer a:hover{color:var(--text)}
 <section style="background:var(--bg2)" id="flow">
   <div class="wrap">
     <div class="sec-label">HOW IT WORKS</div>
-    <h2 class="sec-title">3ステップで始められます</h2>
-    <p class="sec-lead">あなたがやることは「困っていること」を教えるだけ。あとはお任せください。</p>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:stretch">
-      <div class="flow-card">
-        <div class="flow-header">
-          <div class="flow-badge">1</div>
-          <span class="flow-tag hearing">ヒアリング</span>
-          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+    <h2 class="sec-title">相談から納品まで、<em>こう進みます</em></h2>
+    <p class="sec-lead">お願いするのは「やってみたいことを話す」だけ。あとは時間の流れに沿って、一緒に進めます。</p>
+    <div class="flow-wrap">
+      <div class="flow-line"></div>
+      <div class="flow-steps">
+        <div class="fstep">
+          <div class="fstep-dot">1</div>
+          <div class="fstep-time">まずは相談</div>
+          <h3>やりたいことを話す</h3>
+          <p>「請求書が面倒」「問い合わせが多い」——困りごとを話すだけ。専門用語も準備もいりません。</p>
         </div>
-        <h3>お悩みを聞かせてください</h3>
-        <p>「請求書が面倒」「問い合わせが多い」など、普段の困りごとを教えてください。専門用語は一切不要です。</p>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-card">
-        <div class="flow-header">
-          <div class="flow-badge">2</div>
-          <span class="flow-tag build">構築</span>
-          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="fstep">
+          <div class="fstep-dot">2</div>
+          <div class="fstep-time">当日 〜 数日</div>
+          <h3>その場で一緒に作る</h3>
+          <p>ヒアリングをもとに、実際に動くものをその場で構築。見て・触って「こうしたい」を言うだけです。</p>
         </div>
-        <h3>最適な仕組みをつくります</h3>
-        <p>ヒアリングをもとにAIの活用方法を設計。構築からテストまで、すべてこちらで進めます。</p>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-card">
-        <div class="flow-header">
-          <div class="flow-badge">3</div>
-          <span class="flow-tag deliver">納品</span>
-          <div class="flow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="fstep">
+          <div class="fstep-dot">3</div>
+          <div class="fstep-time">完成</div>
+          <h3>あとは使うだけ</h3>
+          <p>マニュアルと操作レクチャー付きで納品。自分で使える・直せる状態まで仕上げます。</p>
         </div>
-        <h3>あとは使うだけ</h3>
-        <p>マニュアルと操作レクチャー付きで納品。社員の方がそのまま使えるレベルに仕上げます。</p>
       </div>
     </div>
   </div>
@@ -520,21 +551,21 @@ footer a:hover{color:var(--text)}
       </div>
       <div class="plan feat">
         <div class="plan-badge">人気</div>
-        <div class="plan-name">おまかせ導入</div>
-        <div class="plan-price">¥148,000〜</div>
-        <p class="plan-note">業務に合ったAIを構築・導入</p>
+        <div class="plan-name">AIエージェント導入</div>
+        <div class="plan-price">¥300,000〜</div>
+        <p class="plan-note">業務をこなすAIエージェントを構築・導入</p>
         <ul class="plan-list">
-          <li>業務分析+最適なAI設計</li>
-          <li>ツールの構築・実装</li>
-          <li>社員向け操作レクチャー</li>
-          <li>導入後1ヶ月サポート</li>
+          <li>業務分析＋AIエージェント設計</li>
+          <li>AIエージェントの構築・実装</li>
+          <li>既存ツール（LINE・メール等）と連携</li>
+          <li>社員向け操作レクチャー＋導入後1ヶ月サポート</li>
           <li>マニュアル付き納品</li>
         </ul>
         <a href="#contact" class="plan-btn plan-btn-fill" style="text-decoration:none">無料相談する</a>
       </div>
       <div class="plan">
         <div class="plan-name">月額サポート</div>
-        <div class="plan-price">¥49,800〜<span style="font-size:16px;font-weight:400;color:var(--muted)">/月</span></div>
+        <div class="plan-price">¥100,000〜<span style="font-size:16px;font-weight:400;color:var(--muted)">/月</span></div>
         <p class="plan-note">継続的にAI活用を広げたい方</p>
         <ul class="plan-list">
           <li>月2回のAI活用相談</li>
@@ -614,6 +645,25 @@ function activateBubble(el){
   document.querySelectorAll('.bubble').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
 }
+
+// --- Film grain, generated as a PNG at runtime ---------------------------
+// Same warm-paper grain used in the service deck, for a consistent texture.
+function makeGrainPNG(size,alphaMax){
+  var c=document.createElement('canvas');c.width=c.height=size;
+  var ctx=c.getContext('2d');var id=ctx.createImageData(size,size);var d=id.data;
+  for(var i=0;i<d.length;i+=4){
+    var v=(Math.random()*255)|0;
+    d[i]=d[i+1]=d[i+2]=v;
+    d[i+3]=(Math.random()*alphaMax)|0;
+  }
+  ctx.putImageData(id,0,0);
+  return c.toDataURL('image/png');
+}
+(function applyGrain(){
+  var root=document.documentElement.style;
+  root.setProperty('--grain','url('+makeGrainPNG(150,210)+')');
+  root.setProperty('--grain-soft','url('+makeGrainPNG(150,150)+')');
+})();
 </script>
 
 </body>
