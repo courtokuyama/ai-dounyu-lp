@@ -122,8 +122,11 @@ section{padding:96px 0}
 .prob-card.open .prob-answer{max-height:200px;padding:14px 16px;margin-top:14px}
 .prob-cta{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);margin-top:10px;text-decoration:none}
 .prob-cta:hover{text-decoration:underline}
-.prob-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--accent-light)}
-.prob-icon svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.prob-num{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:900;color:var(--accent);letter-spacing:.16em;margin-bottom:16px}
+.prob-num::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent-mid),transparent)}
+.prob-card{position:relative;overflow:hidden}
+.prob-card::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.05;pointer-events:none}
+.prob-card>*{position:relative;z-index:1}
 
 /* CASES — "what you can make" editorial grid (teaser level) */
 .make-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -384,37 +387,37 @@ footer a:hover{color:var(--text)}
     <p class="sec-lead">「AIが気になる。でも何から始めれば…」その悩み、あなただけではありません。</p>
     <div class="prob-grid">
       <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="prob-num">01</div>
         <h3>AIって話題だけど、うちに関係ある？</h3>
         <p>ChatGPTやClaudeは知ってる。でも自分の会社のどの業務に使えるのかピンとこない。</p>
         <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">明朗会計AIでは、無料ヒアリングであなたの業務を聞き取り、AIで自動化できるポイントを具体的にご提案します。「うちでは使えない」と思っていた会社ほど、驚くケースが多いです。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
       <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="prob-num">02</div>
         <h3>毎月同じ作業に時間を取られている</h3>
         <p>請求書の作成、レポートの集計、問い合わせ対応…。手作業をやめたいけど、仕組みを作る余裕がない。</p>
         <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">繰り返し作業こそAIの得意分野。請求書の自動生成やレポートのドラフト作成など、仕組みの構築はすべてこちらで行います。あなたは「これが面倒」と言うだけ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
       <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="prob-num">03</div>
         <h3>IT担当がいない</h3>
         <p>社内にエンジニアはいない。外注すると高いし、何を頼めばいいかもわからない。</p>
         <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">エンジニア不要です。設計・構築・レクチャーまですべて明朗会計AIが担当。納品後は社員の方がそのまま使えるレベルに仕上げます。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
       <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="prob-num">04</div>
         <h3>AI導入は高そう</h3>
         <p>大企業向けのサービスばかり。月100万円のコンサルは無理。うちの規模に合う選択肢がほしい。</p>
         <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">明朗会計AIは中小企業に特化。¥300,000〜の明朗会計で、追加料金なし。初期相談は無料なので、まず見積もりだけでもどうぞ。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
       <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <div class="prob-num">05</div>
         <h3>ExcelやGoogleスプレッドシートで限界</h3>
         <p>データは溜まってるのに、活用できてない。毎回手作業で集計してる。</p>
         <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">既存のスプレッドシートやシステムはそのまま。AIが裏側でデータを読み取り、集計・分析・レポート化を自動で行います。ツールを変える必要はありません。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
       </div>
       <div class="prob-card" onclick="this.classList.toggle('open')">
-        <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="prob-num">06</div>
         <h3>導入してもうちのスタッフが使えるか不安</h3>
         <p>最新ツールを入れても使いこなせなかったら意味がない。教育コストも心配。</p>
         <div class="prob-hint">▼ クリックで解決策を表示</div><div class="prob-answer">「使いこなす」必要はありません。普段の操作（メール、スプレッドシート等）をするだけでAIが裏で動く設計。操作レクチャーとマニュアルも付きます。<br><a href="#contact" class="prob-cta">詳しく見る →</a></div>
@@ -605,17 +608,17 @@ footer a:hover{color:var(--text)}
           <span style="font-size:16px;font-weight:700;color:var(--sub)">資料請求＆無料相談</span>
         </div>
         <h2 class="sec-title">まずは、困りごとを<br>教えてください。</h2>
-        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">フォーム送信で「導入事例集」をお届けします。さらに無料相談（60分）で具体的な活用方法をご案内します。</p>
+        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">フォーム送信で「サービス資料（全19ページ）」をお届けします。さらに無料相談（60分）で具体的な活用方法をご案内します。</p>
         <div style="background:var(--accent-light);border:1px solid var(--accent-mid);border-radius:12px;padding:20px 24px;margin-bottom:20px">
-          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px">
-            <span style="font-size:18px">📄</span> 資料でわかること
+          <div style="font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.12em;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+            <span style="display:inline-block;width:20px;height:2px;background:var(--accent);border-radius:2px"></span>資料でわかること
           </div>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>10社の具体的な導入事例（製造・小売・医療・IT等）</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>ヒアリングから納品までの導入プロセス詳細</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>4つの料金プランの詳細比較</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>技術基盤・セキュリティ・NDA対応の詳細</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>全額返金保証・サポート体制の詳細</li>
+            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>AIで作れるもの7種の具体例（HP・チャット・画像・議事録など）</li>
+            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>相談から納品までの進め方</li>
+            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>3つの料金プランの詳細（相談・AIエージェント導入・顧問）</li>
+            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>技術基盤・セキュリティ・NDA対応の考え方</li>
+            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>サポートと「6つの約束」の詳細</li>
           </ul>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px">
