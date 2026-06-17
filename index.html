@@ -200,12 +200,31 @@ section{padding:96px 0}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:15px;color:var(--sub);line-height:1.9}
 .faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
 
-/* CTA */
-.cta-section{background:var(--accent);color:#fff;text-align:center;padding:80px 24px;border-radius:24px;margin:0 24px}
-.cta-section h2{font-size:clamp(24px,3.5vw,36px);font-weight:900;margin-bottom:16px;line-height:1.4}
-.cta-section p{font-size:16px;opacity:.85;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
-.cta-btn{background:#fff;color:var(--accent);padding:16px 48px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 4px 16px rgba(0,0,0,.1)}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+/* CONTACT / 資料請求フォーム */
+.contact-sec{padding:90px 0}
+.contact-grid{display:grid;grid-template-columns:1.02fr 1.08fr;gap:48px;align-items:start}
+.contact-kicker{font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.16em;margin-bottom:14px}
+.contact-info h2{font-size:clamp(26px,3.2vw,38px);font-weight:900;line-height:1.34;letter-spacing:-.02em;margin-bottom:16px}
+.contact-info h2 em{font-style:normal;color:var(--accent)}
+.contact-lead{font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:26px}
+.doc-card{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--accent-light),var(--paper2));border:1px solid var(--accent-mid);border-radius:18px;padding:26px 28px;margin-bottom:22px}
+.doc-card::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.08;pointer-events:none}
+.doc-card>*{position:relative;z-index:1}
+.dc-head{font-size:13px;font-weight:900;color:var(--accent-deep);letter-spacing:.1em;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.dc-head::before{content:'';width:22px;height:2px;background:var(--accent);border-radius:2px}
+.doc-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.doc-list li{font-size:13.5px;color:var(--ink);line-height:1.6;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.doc-list li::before{content:'✓';color:var(--accent);font-weight:900;font-size:13px;margin-top:1px}
+.contact-trust{display:flex;flex-wrap:wrap;gap:10px}
+.contact-trust span{font-size:12.5px;font-weight:700;color:var(--sub);background:var(--card);border:1px solid var(--border);border-radius:100px;padding:8px 16px;display:flex;align-items:center;gap:7px}
+.contact-trust span::before{content:'✓';color:var(--accent);font-weight:900}
+.form-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 18px 46px rgba(40,30,10,.1)}
+.form-card-head{position:relative;overflow:hidden;padding:24px 30px;background:linear-gradient(135deg,var(--accent-bright),var(--accent-deep));color:#fff}
+.form-card-head::after{content:'';position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.16;pointer-events:none}
+.form-card-head .fh-title{position:relative;font-size:18px;font-weight:900;display:flex;align-items:center;gap:10px}
+.form-card-head .fh-sub{position:relative;font-size:12.5px;font-weight:500;opacity:.92;margin-top:4px}
+.form-card-body{padding:8px 14px 14px}
+.form-card iframe{display:block;border:0;width:100%}
 
 /* FOOTER */
 footer{text-align:center;padding:48px 24px;font-size:12px;color:var(--muted);line-height:2}
@@ -235,7 +254,7 @@ footer a:hover{color:var(--text)}
   .hero-lead{font-size:16px}
   section{padding:64px 0}
   .cta-section{margin:0 16px;padding:56px 20px}
-  #contact .wrap > div{grid-template-columns:1fr !important}
+  .contact-grid{grid-template-columns:1fr;gap:32px}
 }
 </style>
 </head>
@@ -600,38 +619,38 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- CTA + FORM -->
-<section style="padding:80px 0" id="contact">
+<!-- CONTACT / FORM -->
+<section class="contact-sec" id="contact">
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
-      <div>
-        <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:16px">
-          <span style="font-size:28px;font-weight:900;color:var(--text)">明朗会計<span style="color:var(--accent)">AI</span></span>
-          <span style="font-size:16px;font-weight:700;color:var(--sub)">資料請求＆無料相談</span>
-        </div>
-        <h2 class="sec-title">まずは、困りごとを<br>教えてください。</h2>
-        <p style="font-size:15px;color:var(--sub);line-height:1.9;margin-bottom:24px">フォーム送信で「サービス資料（全19ページ）」をお届けします。さらに無料相談（60分）で具体的な活用方法をご案内します。</p>
-        <div style="background:var(--accent-light);border:1px solid var(--accent-mid);border-radius:12px;padding:20px 24px;margin-bottom:20px">
-          <div style="font-size:13px;font-weight:900;color:var(--accent);letter-spacing:.12em;margin-bottom:12px;display:flex;align-items:center;gap:10px">
-            <span style="display:inline-block;width:20px;height:2px;background:var(--accent);border-radius:2px"></span>資料でわかること
-          </div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>AIで作れるもの7種の具体例（HP・チャット・画像・議事録など）</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>相談から納品までの進め方</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>3つの料金プランの詳細（相談・AIエージェント導入・顧問）</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>技術基盤・セキュリティ・NDA対応の考え方</li>
-            <li style="font-size:13px;color:var(--sub);display:flex;align-items:flex-start;gap:8px;line-height:1.6"><span style="color:var(--accent);font-weight:700;font-size:11px">●</span>サポートと「6つの約束」の詳細</li>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-kicker">CONTACT — 資料請求 ＆ 無料相談</div>
+        <h2>まずは、困りごとを<br><em>教えてください。</em></h2>
+        <p class="contact-lead">フォーム送信で「サービス資料（全19ページ）」をお届けします。さらに無料相談（60分）で、あなたの会社に合った活用方法を具体的にご案内します。</p>
+        <div class="doc-card">
+          <div class="dc-head">資料でわかること</div>
+          <ul class="doc-list">
+            <li>AIで作れるもの7種の具体例（HP・チャット・画像・議事録など）</li>
+            <li>相談から納品までの進め方</li>
+            <li>3つの料金プランの詳細（相談・AIエージェント導入・顧問）</li>
+            <li>技術基盤・セキュリティ・NDA対応の考え方</li>
+            <li>サポートと「6つの約束」の詳細</li>
           </ul>
         </div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 初期費用なし</span>
-          <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 営業日1日以内に返信</span>
-          <span style="font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px"><span style="color:var(--accent);font-weight:700">✓</span> 無理な営業は一切しません</span>
+        <div class="contact-trust">
+          <span>初期費用なし</span>
+          <span>営業日1日以内に返信</span>
+          <span>無理な営業は一切しません</span>
         </div>
       </div>
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div style="padding:20px 24px 14px;font-size:16px;font-weight:700;color:var(--text);border-bottom:1px solid var(--border);background:var(--bg)">資料請求フォーム<br><span style="font-size:12px;font-weight:400;color:var(--muted)">必要事項をご入力ください</span></div>
-        <iframe data-tally-src="https://tally.so/r/obVzWX?transparentBackground=1&hideTitle=1" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0" title="明朗会計AI 資料請求フォーム" style="border:0;display:block"></iframe>
+      <div class="form-card">
+        <div class="form-card-head">
+          <div class="fh-title">資料請求フォーム</div>
+          <div class="fh-sub">30秒で完了。必要事項をご入力ください。</div>
+        </div>
+        <div class="form-card-body">
+          <iframe data-tally-src="https://tally.so/r/obVzWX?transparentBackground=1&hideTitle=1" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0" title="明朗会計AI 資料請求フォーム"></iframe>
+        </div>
       </div>
     </div>
   </div>
