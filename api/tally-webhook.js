@@ -61,17 +61,24 @@ module.exports = async (req, res) => {
     .filter((f) => f && f.label)
     .map((f) => `*${f.label}*: ${renderValue(f)}`);
 
+  // 流入元サイト: Webhook URL のクエリ (?source=...&url=...) から取得
+  const q = req.query || {};
+  const srcName = q.source || q.src || data.formName || body.formName || '';
+  const srcUrl = q.url || q.source_url || '';
+  const srcLink = srcUrl
+    ? `<${srcUrl}|${srcName || srcUrl}>`
+    : (srcName || '不明');
+
   const formName = data.formName || body.formName || '明朗会計AI フォーム';
   const when = new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
 
+  const bodyText = [`🌐 *流入元*: ${srcLink}`, '', ...(lines.length ? lines : ['(入力項目なし)'])].join('\n');
+
   const slackPayload = {
-    text: `📩 新しい資料請求がありました（${formName}）`,
+    text: `📩 新しい資料請求がありました（${srcName || formName}）`,
     blocks: [
       { type: 'header', text: { type: 'plain_text', text: '📩 新しい資料請求', emoji: true } },
-      {
-        type: 'section',
-        text: { type: 'mrkdwn', text: lines.length ? lines.join('\n') : '(入力項目なし)' },
-      },
+      { type: 'section', text: { type: 'mrkdwn', text: bodyText } },
       {
         type: 'context',
         elements: [{ type: 'mrkdwn', text: `${formName} ・ ${when}` }],
