@@ -1,9 +1,13 @@
 // Tally → Slack 通知用の Vercel サーバーレス関数
 // Tally のフォーム送信 Webhook を受け取り、Slack の Incoming Webhook に整形して転送する。
 //
-// 必要な環境変数 (Vercel の Project Settings → Environment Variables):
-//   SLACK_WEBHOOK_URL  … Slack Incoming Webhook の URL (必須)
-//   WEBHOOK_TOKEN      … 任意。設定した場合、?token=... が一致しないリクエストは拒否(簡易保護)
+// 【重要】既定では無効(dormant)。現在の本番通知は Tally のネイティブ Slack 連携が担当しているため、
+//   この関数を有効化すると二重通知になる。使う場合は Tally ネイティブ連携を必ず先に外すこと。
+//
+// 環境変数 (Vercel の Project Settings → Environment Variables):
+//   TALLY_WEBHOOK_ENABLED … "1" のときだけ実際に Slack へ送信する(既定OFF=二重通知防止スイッチ)
+//   SLACK_WEBHOOK_URL     … Slack Incoming Webhook の URL (有効化時は必須)
+//   WEBHOOK_TOKEN         … 任意。設定した場合、?token=... が一致しないリクエストは拒否(簡易保護)
 //
 // Tally 側: Integrations → Webhooks に
 //   https://<your-domain>/api/tally-webhook?token=<WEBHOOK_TOKEN>
@@ -12,6 +16,12 @@
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method Not Allowed' });
+    return;
+  }
+
+  // 二重通知ガード: 明示的に有効化されていない限り、何もせず 200 を返す(エラーにもしない)
+  if (process.env.TALLY_WEBHOOK_ENABLED !== '1') {
+    res.status(200).json({ skipped: true, reason: 'disabled by default; Tally native Slack integration is the active path. Set TALLY_WEBHOOK_ENABLED=1 to enable (and disable the Tally native integration first to avoid duplicates).' });
     return;
   }
 
