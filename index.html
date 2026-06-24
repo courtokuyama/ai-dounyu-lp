@@ -137,6 +137,7 @@ section{padding:96px 0}
 .make-figure{position:relative;min-height:300px;background-size:cover;background-position:center;filter:saturate(.96)}
 .make-figure .fade{position:absolute;inset:0;background:linear-gradient(90deg,var(--paper) 1%,transparent 52%)}
 .make-figure .grain{position:absolute;inset:0;background-image:var(--grain-soft);background-size:150px 150px;opacity:.1;pointer-events:none}
+.make-figure.is-ph{background-image:linear-gradient(135deg,var(--accent-light),var(--accent-mid))} /* 画像準備中プレースホルダ: data-asset の画像を後で差し込む */
 .make-body{padding:44px 56px;display:flex;flex-direction:column;justify-content:center}
 .make-row.rev .make-figure{order:-1}
 .make-row.rev .make-figure .fade{background:linear-gradient(270deg,var(--paper) 1%,transparent 52%)}
@@ -494,17 +495,47 @@ footer a:hover{color:var(--text)}
       <div class="make-row">
         <div class="make-body">
           <div class="make-num">03</div>
-          <span class="make-tag">画像・ロゴ・チラシ</span>
-          <h3>ロゴもチラシも画像も、<br>“それっぽい”がすぐ揃う。</h3>
-          <p>「カフェっぽいロゴを5案」と頼むだけ。気に入らなければ何度でも。外注費も待ち時間もかかりません。</p>
+          <span class="make-tag">営業</span>
+          <h3>「営業リスト作り」も「フォーム送信」も、<br>AIが代わりに動きます。</h3>
+          <p>業界やエリアを伝えるだけで、見込み客リストを自動作成。問い合わせフォームへの営業文も、1日200社ペースで自動送信。手が回らなかった新規開拓が、勝手に前へ進みます。</p>
+          <div class="make-time">かかる時間 <b>毎日自動</b></div>
+        </div>
+        <div class="make-figure is-ph" data-asset="assets/case-sales.jpg"><div class="fade"></div><div class="grain"></div></div>
+      </div>
+      <div class="make-row rev">
+        <div class="make-body">
+          <div class="make-num">04</div>
+          <span class="make-tag">経理・会計</span>
+          <h3>freee・マネーフォワードと連携。<br>面倒な経理を、まるごと自動化。</h3>
+          <p>領収書や通帳をデータ化し、仕訳ドラフトを自動生成。銀行・カードの明細と会計入力を突き合わせ、ズレた所“だけ”を抽出。月次資料のたたき台づくりや問い合わせの一次対応まで任せて、経理の人件費をぐっと圧縮できます。</p>
+          <div class="make-time">かかる時間 <b>大幅削減</b></div>
+        </div>
+        <div class="make-figure is-ph" data-asset="assets/case-keiri.jpg"><div class="fade"></div><div class="grain"></div></div>
+      </div>
+      <div class="make-row">
+        <div class="make-body">
+          <div class="make-num">05</div>
+          <span class="make-tag">動画</span>
+          <h3>“使ってみた風”の動画を、<br>毎日いくつでも量産。</h3>
+          <p>商品やサービスを伝えるだけで、UGC（ユーザー投稿）風のショート動画をまとめて生成。撮影なしで、SNSや広告にそのまま流せる動画が一気に揃います。</p>
+          <div class="make-time">かかる時間 <b>一括生成</b></div>
+        </div>
+        <div class="make-figure is-ph" data-asset="assets/case-ugc.jpg"><div class="fade"></div><div class="grain"></div></div>
+      </div>
+      <div class="make-row rev">
+        <div class="make-body">
+          <div class="make-num">06</div>
+          <span class="make-tag">広告クリエイティブ</span>
+          <h3>当たるまで試せる、<br>広告バナーを大量に。</h3>
+          <p>「セール用に20パターン」と頼むだけで、サイズ違い・訴求違いのバナーを一気に作成。A/Bテストし放題で、勝ちパターンが早く見つかります。</p>
           <div class="make-time">かかる時間 <b>その場で</b></div>
         </div>
-        <div class="make-figure" style="background-image:url('assets/case5.jpg')"><div class="fade"></div><div class="grain"></div></div>
+        <div class="make-figure is-ph" data-asset="assets/case-banner.jpg"><div class="fade"></div><div class="grain"></div></div>
       </div>
     </div>
     <div class="make-more">
       <h3>作れるものは、まだまだあります。</h3>
-      <p>占いチャット、あなた専用の“相棒AI”、SNSの投稿文、会議の議事録まで——ぜんぶ「話すだけ」。全種類の作り方と実例は、無料の資料でまとめてご紹介しています。</p>
+      <p>あなた専用の“相棒AI”、SNSの投稿文、会議の議事録まで——ぜんぶ「話すだけ」。全種類の作り方と実例は、無料の資料でまとめてご紹介しています。</p>
       <a href="#contact" class="btn-primary" style="text-decoration:none;display:inline-block">資料を無料で受け取る →</a>
     </div>
     <div class="biz-head">
