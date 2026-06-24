@@ -235,9 +235,27 @@ footer a:hover{color:var(--text)}
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .biz-grid{grid-template-columns:1fr}
-  .flow-steps{grid-template-columns:1fr;gap:32px}
+  /* MAKE headings: smaller on mobile so the <br> splits never auto-wrap mid-phrase */
+  .make-body h3{font-size:20px}
+  /* stats are 2-col on mobile (narrow): drop the forced <br> so descriptions wrap naturally */
+  .stat-desc br{display:none}
+  /* biz outcomes: compact rows + trim to the top 6 so the section isn't endless on mobile */
+  .biz-grid{grid-template-columns:1fr;gap:0}
+  .biz-item{padding:11px 2px;gap:10px}
+  .biz-item:nth-child(n+7){display:none}
+  .bz-tag{width:46px;font-size:10px}
+  .bz-txt{font-size:12.5px;line-height:1.45}
+  .bz-res{font-size:11px}
+  .biz-head{margin-top:48px}
+  .biz-head h3{font-size:18px}
+  /* HOW IT WORKS: dot + text side-by-side so all 3 steps read at a glance, no scroll */
+  .flow-steps{grid-template-columns:1fr;gap:16px}
   .flow-line{display:none}
+  .fstep{display:grid;grid-template-columns:46px 1fr;column-gap:15px;align-items:start;text-align:left;padding:0}
+  .fstep-dot{grid-column:1;grid-row:1 / span 3;width:46px;height:46px;font-size:19px;margin-bottom:0}
+  .fstep-time{grid-column:2;justify-self:start;margin-bottom:5px}
+  .fstep h3{grid-column:2;font-size:17px;margin-bottom:4px}
+  .fstep p{grid-column:2;font-size:13px;line-height:1.65;max-width:none}
   .price-grid{grid-template-columns:1fr}
   /* PROBLEMS stack: image becomes a top banner fading downward */
   .prob-split{grid-template-columns:1fr}
@@ -516,7 +534,7 @@ footer a:hover{color:var(--text)}
         <div class="make-body">
           <div class="make-num">05</div>
           <span class="make-tag">動画</span>
-          <h3>“使ってみた風”の動画を、<br>毎日いくつでも量産。</h3>
+          <h3>“使ってみた風”の<br>動画を毎日量産。</h3>
           <p>商品やサービスを伝えるだけで、UGC（ユーザー投稿）風のショート動画をまとめて生成。撮影なしで、SNSや広告にそのまま流せる動画が一気に揃います。</p>
           <div class="make-time">かかる時間 <b>一括生成</b></div>
         </div>
